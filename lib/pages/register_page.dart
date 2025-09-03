@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/pages/login_page.dart';
-import 'package:todolist/widgets/reusable_textfield.dart';
-import 'package:todolist/widgets/reusable_button.dart';
+import 'package:todolist/widgets/custom_textfield.dart';
+import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/datetime.dart';
 
 DateTime? birthDate;
@@ -36,20 +36,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 30),
                 CustomTextField(
                   label: "Name",
-                  isPassword: false,
                   controller: nameController,
                 ),
                 const SizedBox(height: 20),
                 CustomTextField(
                   label: "Username",
-                  isPassword: false,
                   controller: usernameController,
                 ),
                 const SizedBox(height: 20),
                 CustomTextField(
                   label: "Password",
-                  isPassword: true,
                   controller: passwordController,
+                  isPassword: true,
                 ),
                 const SizedBox(height: 20),
                 CustomDateField(
@@ -65,9 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 50),
                   child: Center(
-                    child: CostumButton(
+                    child: CustomButton(
                       text: "Register",
-                      textColor: const Color.fromARGB(255, 255, 255, 255),
                       onPressed: () {
                         if (nameController.text.isEmpty ||
                             usernameController.text.isEmpty ||

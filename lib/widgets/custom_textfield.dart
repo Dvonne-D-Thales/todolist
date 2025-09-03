@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
-  final bool isPassword;
   final TextEditingController controller;
+  final bool isPassword;
+  final int maxLines;
 
   const CustomTextField({
     super.key,
     required this.label,
-    required this.isPassword,
-    required this.controller, required InputDecoration decoration, required int maxLines,
+    required this.controller,
+    this.isPassword = false,
+    this.maxLines = 1,
   });
 
   @override
@@ -17,9 +19,10 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isPassword,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }

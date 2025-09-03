@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/pages/add_page.dart';
+import 'package:todolist/widgets/todo_card.dart';
 
 class TodoListPage extends StatelessWidget {
   const TodoListPage({super.key});
@@ -13,19 +15,28 @@ class TodoListPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: 5,
         itemBuilder: (context, index) {
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              leading: const Icon(Icons.check_box_outline_blank),
-              title: Text('Task ${index + 1}'),
-              subtitle: const Text('Deskripsi tugas'),
-              trailing: const Icon(Icons.more_vert),
-            ),
+          return TodoCard(
+            title: 'Task ${index + 1}',
+            description: 'Deskripsi tugas',
+            onDelete: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Hapus Task ${index + 1}')),
+              );
+            },
+            isDone: false,
+            onCheck: () {},
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddPage(),
+                      ),
+                    );
+                  },
         child: const Icon(Icons.add),
       ),
     );

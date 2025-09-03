@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:todolist/pages/add_page.dart';
 import 'package:todolist/pages/history_page.dart';
 import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/pages/mainmenu_page.dart';
@@ -14,6 +15,7 @@ class AppPages {
     GetPage(name: '/todolist', page: () => const TodoListPage()),
     GetPage(name: '/history', page: () => const HistoryPage()),
     GetPage(name: '/profile', page: () => const ProfilePage()),
+    GetPage(name: '/add_page', page: () => const AddPage()), // Pastikan halaman AddTodoPage sudah dibuat
   ];
   
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todolist/pages/mainmenu_page.dart';
 import 'package:todolist/pages/register_page.dart';
+import 'package:todolist/routes/routes.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -31,11 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  MainmenuPage()),
-                  );
+                  Get.offAllNamed('/mainmenu');
                 },
                 child: Text("OK"),
               ),

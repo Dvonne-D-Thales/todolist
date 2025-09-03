@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todolist/controllers/todolist_controller.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 
-class AddPage extends StatefulWidget {
-  const AddPage({super.key});
 
-  @override
-  State<AddPage> createState() => _AddPageState();
-}
+class AddPage extends StatelessWidget {
+  AddPage({super.key});
 
-class _AddPageState extends State<AddPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final todoController = Get.find<TodoController>();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Tambah Tugas")),
       body: Padding(
@@ -39,20 +39,31 @@ class _AddPageState extends State<AddPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-              onPressed: () {
-                if (titleController.text.isEmpty || descController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Judul dan deskripsi harus diisi")),
-                  );
-                } else {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Tugas berhasil ditambahkan")),
-                  );
-                }
-              },
-              child: const Text("Simpan"),
-            ),
+                onPressed: () {
+                  if (titleController.text.trim().isEmpty ||
+                      descController.text.trim().isEmpty) {
+                    Get.snackbar(
+                      "Error",
+                      "Judul dan deskripsi harus diisi",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.red.withOpacity(0.2),
+                    );
+                  } else {
+                    todoController.addTodo(
+                      titleController.text.trim(),
+                      descController.text.trim(),
+                    );
+                    Get.back(); // balik ke TodoListPage
+                    Get.snackbar(
+                      "Sukses",
+                      "Tugas berhasil ditambahkan",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.green.withOpacity(0.2),
+                    );
+                  }
+                },
+                child: const Text("Simpan"),
+              ),
             ),
           ],
         ),

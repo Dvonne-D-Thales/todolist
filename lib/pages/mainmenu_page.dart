@@ -13,7 +13,6 @@ class MainmenuPage extends StatelessWidget {
     final NavbarController navbarC = Get.put(NavbarController());
     return Scaffold(
       appBar: AppBar(title: const Text('Main Menu')),
-      drawer: NavDrawer(),
       body: Obx(() => navC.pages[navbarC.selectedIndex.value]),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
         currentIndex: navbarC.selectedIndex.value,

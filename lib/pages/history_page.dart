@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/widgets/history_card.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -10,7 +11,9 @@ class HistoryPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text('History'),
       ),
-      body: ListView(
+      body: HistoryCard(
+        title: 'judul',
+        description: 'lorem ipsum dolor sit amet',
         children: List.generate(5, (index) => ListTile(
           leading: const Icon(Icons.history),
           title: Text('Riwayat ${index + 1}'),

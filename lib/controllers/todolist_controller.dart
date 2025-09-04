@@ -4,7 +4,7 @@ import 'package:todolist/models/todolist_model.dart';
 class TodoController extends GetxController {
   var todos = <TodoItem>[].obs;
 
-  void addTodo(String title, String description) {
+  void addTodo(String title, String description, String value) {
     final newTodo = TodoItem(
       title: title,
       description: description,

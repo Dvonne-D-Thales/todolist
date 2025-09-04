@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           );
                         }
-                      },
+                      }, borderRadius: 12, elevation: 12,
                     ),
                   ),
                 ),

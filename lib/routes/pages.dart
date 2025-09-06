@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:todolist/bindings/addpage_binding.dart';
+import 'package:todolist/bindings/history_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
 import 'package:todolist/bindings/todolist_binding.dart';
 import 'package:todolist/pages/add_page.dart';
@@ -24,7 +25,11 @@ class AppPages {
       page: () => TodoListPage(),
       binding: TodolistBinding(),
     ),
-    GetPage(name: '/history', page: () => const HistoryPage()),
+    GetPage(
+      name: '/history',
+      page: () => const HistoryPage(),
+      binding: HistoryBinding(),
+    ),
     GetPage(name: '/profile', page: () => const ProfilePage()),
     GetPage(
       name: '/add_page',

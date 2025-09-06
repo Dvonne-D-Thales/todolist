@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TodoCard extends StatelessWidget {
   final String title;
   final String description;
+  final String category; // Add this line
   final VoidCallback? onDelete;
   final bool isDone;
   final VoidCallback? onCheck;
@@ -11,6 +12,7 @@ class TodoCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
+    required this.category, // Add this line
     this.onDelete,
     this.isDone = false,
     this.onCheck,
@@ -26,7 +28,17 @@ class TodoCard extends StatelessWidget {
           onPressed: onCheck,
         ),
         title: Text(title),
-        subtitle: Text(description),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(description),
+            const SizedBox(height: 4),
+            Text(
+              'Category: $category',
+              style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
+            ),
+          ],
+        ),
         trailing: IconButton(
           icon: const Icon(Icons.delete),
           onPressed: onDelete,

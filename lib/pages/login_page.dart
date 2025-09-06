@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/pages/mainmenu_page.dart';
+import 'package:todolist/controllers/auth_controller.dart';
 import 'package:todolist/pages/register_page.dart';
-import 'package:todolist/routes/routes.dart';
 import 'package:todolist/widgets/custom_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,76 +14,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  final String correctEmail = "jangkar";
-  final String correctPassword = "123";
-
-  void handleLogin() {
-    String email = emailController.text;
-    String password = passwordController.text;
-
-    if (email == correctEmail && password == correctPassword) {
-      showDialog(
-
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Login Successful"),
-            content: Text("Welcome, $email!"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Get.offAllNamed('/mainmenu');
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    } else if (email == "" && password == "") {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Input Please"),
-            content: Text("input email dan password kosong"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      setState(() {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("PEYUSUP!!!"),
-              content: Text("penyusup tidak dikenal, silahkan coba lagi"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      });
-      emailController.clear();
-      passwordController.clear();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +37,10 @@ class _LoginPageState extends State<LoginPage> {
                 // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.95),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 28,
+                    vertical: 32,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -191,12 +123,19 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.deepPurple,
                         textColor: Colors.white,
                         onPressed: () {
-                          Get.offAllNamed(Routes.login);
-                          handleLogin();
+                          final authController = Get.find<AuthController>();
+                          authController.login(
+                            context,
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            emailController,
+                            passwordController,
+                          );
                         },
                         borderRadius: 16,
                         elevation: 4,
                       ),
+
                       const SizedBox(height: 14),
                       CustomButton(
                         text: "Register",

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/widgets/nav_drawer.dart';
 import 'package:todolist/controllers/navdrawer_controller.dart';
 import 'package:todolist/controllers/navbar_controller.dart';
 

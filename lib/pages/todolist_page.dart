@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
-import 'package:todolist/pages/add_page.dart';
-import 'package:todolist/routes/routes.dart';
 import 'package:todolist/widgets/todo_card.dart';
 
 class TodoListPage extends StatelessWidget {
@@ -28,6 +26,7 @@ class TodoListPage extends StatelessWidget {
             return TodoCard(
               title: todo.title,
               description: todo.description,
+              category: todo.category, // Add this line
               isDone: todo.isDone,
               onDelete: () {
                 todoController.deleteTodo(index);

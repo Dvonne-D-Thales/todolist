@@ -79,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                           CostumText("Enriko Raina P."),
+                          CostumText("Enriko Raina P."),
                           const SizedBox(height: 8),
                           CostumText("11 PPLG 1"),
                           CostumText("Absen : 12"),

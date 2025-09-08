@@ -28,7 +28,7 @@ class AuthController extends GetxController {
         onConfirm: () async{
           final prefs = await SharedPreferences.getInstance();
           prefs.setString("username", emailController.text.toString());
-          Get.offAllNamed(Routes.mainmenu);
+          Get.offAllNamed(Routes.splashscreen);
         },
       );
     } else if (email.isEmpty && password.isEmpty) {

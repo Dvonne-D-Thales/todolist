@@ -11,14 +11,16 @@ class HistoryPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text('History'),
       ),
-      body: HistoryCard(
-        title: 'judul',
-        description: 'lorem ipsum dolor sit amet',
-        children: List.generate(5, (index) => ListTile(
-          leading: const Icon(Icons.history),
-          title: Text('Riwayat ${index + 1}'),
-          subtitle: const Text('Detail riwayat'),
-        )),
+      body: SingleChildScrollView(
+        child: HistoryCard(
+          title: 'judul',
+          description: 'lorem ipsum dolor sit amet',
+          children: List.generate(5, (index) => ListTile(
+            leading: const Icon(Icons.history),
+            title: Text('Riwayat ${index + 1}'),
+            subtitle: const Text('Detail riwayat'),
+          )),
+        ),
       ),
     );
   }

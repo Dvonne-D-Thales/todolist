@@ -21,25 +21,33 @@ class TodoListPage extends StatelessWidget {
         if (todoController.todos.isEmpty) {
           return const Center(child: Text("No tasks yet"));
         }
-        return ListView.builder(
-          itemCount: todoController.todos.length,
-          itemBuilder: (context, index) {
-            final todo = todoController.todos[index];
-            return TodoCard(
-              title: todo.title,
-              description: todo.description,
-              isDone: todo.isDone,
-              onDelete: () {
-                todoController.deleteTodo(index);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Deleted ${todo.title}')),
-                );
-              },
-              onCheck: () {
-                todoController.toggleTodo(index);
-              },
-            );
-          },
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: todoController.todos.length,
+                itemBuilder: (context, index) {
+                  final todo = todoController.todos[index];
+                  return TodoCard(
+                    title: todo.title,
+                    description: todo.description,
+                    isDone: todo.isDone,
+                    onDelete: () {
+                      todoController.deleteTodo(index);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Deleted ${todo.title}')),
+                      );
+                    },
+                    onCheck: () {
+                      todoController.toggleTodo(index);
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         );
       }),
       floatingActionButton: FloatingActionButton(

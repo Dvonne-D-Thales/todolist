@@ -26,16 +26,13 @@ class TodoListPage extends StatelessWidget {
             return TodoCard(
               title: todo.title,
               description: todo.description,
-              category: todo.category, // Add this line
+              category: todo.category,
               isDone: todo.isDone,
               onDelete: () {
-                todoController.deleteTodo(index);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Deleted ${todo.title}')),
-                );
+                todoController.handleDelete(context, index);
               },
               onCheck: () {
-                todoController.toggleTodo(index);
+                todoController.handleToggle(index);
               },
             );
           },

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:todolist/controllers/history_controller.dart';
 import 'package:todolist/models/todolist_model.dart';
 
@@ -10,7 +11,7 @@ class TodoController extends GetxController {
       title: title,
       description: description,
       category: category,
-    ); // Add category
+    );
     todos.add(newTodo);
   }
 
@@ -34,5 +35,17 @@ class TodoController extends GetxController {
 
       todos.removeAt(index);
     }
+  }
+
+  void handleDelete(BuildContext context, int index) {
+    final title = todos[index].title;
+    deleteTodo(index);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Deleted $title')),
+    );
+  }
+
+  void handleToggle(int index) {
+    toggleTodo(index);
   }
 }

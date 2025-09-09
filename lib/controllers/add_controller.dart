@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
+import 'package:todolist/routes/routes.dart';
 
 class AddController extends GetxController {
   final titleController = TextEditingController();
@@ -25,8 +26,7 @@ class AddController extends GetxController {
         "Error",
         "Judul, deskripsi, dan kategori harus diisi",
         snackPosition: SnackPosition.BOTTOM,
-        // ignore: deprecated_member_use
-        backgroundColor: Colors.red.withOpacity(0.2),
+        backgroundColor: Colors.red,
       );
     } else {
       todoController.addTodo(
@@ -34,13 +34,12 @@ class AddController extends GetxController {
         descController.text.trim(),
         category.value, // kirim kategori juga
       );
-      Get.back(); // balik ke TodoListPage
+      Get.offAllNamed(Routes.todoList); // balik ke TodoListPage
       Get.snackbar(
         "Sukses",
         "Tugas berhasil ditambahkan",
         snackPosition: SnackPosition.BOTTOM,
-        // ignore: deprecated_member_use
-        backgroundColor: Colors.green.withOpacity(0.2),
+        backgroundColor: Colors.green,
       );
     }
   }

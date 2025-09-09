@@ -99,7 +99,7 @@ class ProfilePage extends StatelessWidget {
 
               const SizedBox(height: 24),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical:20 ),
                 child: CustomButton(
                   text: "Logout",
                   color: Colors.red,

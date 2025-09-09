@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
+import 'package:todolist/widgets/costum_card.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/dropdown_buttonfield.dart';
 
@@ -27,6 +28,8 @@ class AddPage extends StatelessWidget {
       body: SingleChildScrollView(
         // Wrap with SingleChildScrollView
         padding: const EdgeInsets.all(24.0),
+        child: CostumCard(
+          color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -89,6 +92,7 @@ class AddPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

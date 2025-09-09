@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:todolist/routes/routes.dart';
 
 class AuthController extends GetxController {
-  final correctEmail = "jangkar";
-  final correctPassword = "123";
+  final correctUsername = "sasi";
+  final correctPassword = "enriko";
 
   void login(BuildContext context, String email, String password,
       TextEditingController emailController, TextEditingController passwordController) {
-    if (email == correctEmail && password == correctPassword) {
+    if (email == correctUsername && password == correctPassword) {
       showDialog(
         context: context,
         builder: (context) {

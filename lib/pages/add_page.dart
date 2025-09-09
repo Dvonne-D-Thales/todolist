@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
-import 'package:todolist/routes/routes.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/dropdown_buttonfield.dart';
 
@@ -68,8 +67,10 @@ class AddPage extends StatelessWidget {
                       "Error",
                       "Judul, deskripsi, dan kategori harus diisi",
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
+                      backgroundColor:  Colors.red,
+                      
                     );
+                    
                   } else {
                     todoController.addTodo(
                       titleController.text.trim(),

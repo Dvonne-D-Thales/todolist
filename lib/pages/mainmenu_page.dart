@@ -10,32 +10,31 @@ class MainmenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavDrawerController navC = Get.put(NavDrawerController());
     final NavbarController navbarC = Get.put(NavbarController());
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Menu'),
-        backgroundColor:Color.fromARGB(255, 230, 240, 250),
-        ),
-      body: Obx(() => navC.pages[navbarC.selectedIndex.value]),
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
-        currentIndex: navbarC.selectedIndex.value,
-        onTap: (index) {
-          navbarC.changeTab(index);
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Todo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      )),
+      body: Obx(() {
+        return navC.pages[navbarC.selectedIndex.value];
+      }),
+      bottomNavigationBar: Obx(() {
+        return BottomNavigationBar(
+          currentIndex: navbarC.selectedIndex.value,
+          onTap: (index) => navbarC.changeTab(index),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Todo',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        );
+      }),
     );
   }
 }

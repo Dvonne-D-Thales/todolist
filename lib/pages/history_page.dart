@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/history_controller.dart';
+import 'package:todolist/widgets/history_card.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -10,19 +11,28 @@ class HistoryPage extends StatelessWidget {
     final historyController = Get.find<HistoryController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("History")),
+       backgroundColor:Color.fromARGB(255, 230, 240, 250),
+      appBar: AppBar(
+         backgroundColor:Color.fromARGB(255, 230, 240, 250),
+        automaticallyImplyLeading: false,
+        title: const Text('History'),
+      ),
       body: Obx(() {
         if (historyController.history.isEmpty) {
-          return const Center(child: Text("No completed tasks yet"));
+          return const Center(child: Text("No history yet"));
         }
         return ListView.builder(
           itemCount: historyController.history.length,
           itemBuilder: (context, index) {
-            final todo = historyController.history[index];
-            return ListTile(
-              title: Text(todo.title),
-              subtitle: Text(todo.description),
-              trailing: const Icon(Icons.check, color: Colors.green),
+            final item = historyController.history[index];
+            return HistoryCard(
+              title: item.title,
+              description: item.description,
+              category: item.category,
+              onDelete: () {
+                historyController.handleDelete(context, index);
+              },
+              children: const [],
             );
           },
         );

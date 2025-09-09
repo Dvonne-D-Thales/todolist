@@ -11,7 +11,9 @@ class TodoListPage extends StatelessWidget {
     final todoController = Get.find<TodoController>();
 
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 230, 240, 250),
         automaticallyImplyLeading: false,
         title: const Text('Todo List'),
       ),
@@ -26,16 +28,13 @@ class TodoListPage extends StatelessWidget {
             return TodoCard(
               title: todo.title,
               description: todo.description,
-              category: todo.category, // Add this line
+              category: todo.category,
               isDone: todo.isDone,
               onDelete: () {
-                todoController.deleteTodo(index);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Deleted ${todo.title}')),
-                );
+                todoController.handleDelete(context, index);
               },
               onCheck: () {
-                todoController.toggleTodo(index);
+                todoController.handleToggle(index);
               },
             );
           },

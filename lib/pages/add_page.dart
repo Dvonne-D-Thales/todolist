@@ -19,7 +19,11 @@ class AddPage extends StatelessWidget {
     final todoController = Get.find<TodoController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Tugas")),
+      backgroundColor: Color.fromARGB(255, 230, 240, 250),
+      appBar: AppBar(
+        title: const Text("Tambah Tugas"),
+        backgroundColor: Color.fromARGB(255, 230, 240, 250),
+      ),
       resizeToAvoidBottomInset: true, // Add this line
       body: SingleChildScrollView(
         // Wrap with SingleChildScrollView
@@ -32,6 +36,8 @@ class AddPage extends StatelessWidget {
             CustomTextField(
               label: "Masukan Judul",
               controller: titleController,
+              maxLines: 1,
+              prefixIcon: Icons.title,
             ),
             const SizedBox(height: 20),
             const Text("Deskripsi", style: TextStyle(fontSize: 16)),
@@ -40,6 +46,7 @@ class AddPage extends StatelessWidget {
               label: "Masukkan deskripsi ",
               controller: descController,
               maxLines: 3,
+              prefixIcon: Icons.description,
             ),
             const SizedBox(height: 20),
             const Text("Kategori", style: TextStyle(fontSize: 16)),
@@ -67,17 +74,14 @@ class AddPage extends StatelessWidget {
                     todoController.addTodo(
                       titleController.text.trim(),
                       descController.text.trim(),
-                      category.value,
+                      category.value, // kategori ikut disimpan
                     );
-
-                    Get.closeAllSnackbars(); // tutup snackbar yg masih jalan
-                    Get.offAllNamed(Routes.mainmenu);
+                    Get.back();
                     Get.snackbar(
                       "Sukses",
                       "Tugas berhasil ditambahkan",
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: Colors.green,
-                      duration: const Duration(seconds: 2),
                     );
                   }
                 },

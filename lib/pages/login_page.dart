@@ -34,8 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),
-                // ignore: deprecated_member_use
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 28,
@@ -50,8 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              // ignore: deprecated_member_use
-                              color: Colors.deepPurple.withOpacity(0.2),
+                              color: Colors.deepPurple,
                               blurRadius: 16,
                               offset: Offset(0, 8),
                             ),

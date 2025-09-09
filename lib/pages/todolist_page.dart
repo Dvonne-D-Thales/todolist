@@ -11,7 +11,9 @@ class TodoListPage extends StatelessWidget {
     final todoController = Get.find<TodoController>();
 
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 230, 240, 250),
         automaticallyImplyLeading: false,
         title: const Text('Todo List'),
       ),

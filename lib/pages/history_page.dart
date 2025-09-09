@@ -11,7 +11,9 @@ class HistoryPage extends StatelessWidget {
     final historyController = Get.find<HistoryController>();
 
     return Scaffold(
+       backgroundColor:Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(
+         backgroundColor:Color.fromARGB(255, 230, 240, 250),
         automaticallyImplyLeading: false,
         title: const Text('History'),
       ),

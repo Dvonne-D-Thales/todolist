@@ -7,8 +7,8 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     // Controller global, dipakai seumur hidup app
-    Get.put<AuthController>(AuthController(), permanent: true);
-    Get.put<TodoController>(TodoController(), permanent: true);
-    Get.put<HistoryController>(HistoryController(), permanent: true);
+    Get.put<AuthController>(AuthController());
+    Get.put<TodoController>(TodoController());
+    Get.put<HistoryController>(HistoryController());
   }
 }

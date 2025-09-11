@@ -19,116 +19,122 @@ class ProfilePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text('Profile'),
       ),
-      body: Column(
-        children: [
-          // Scroll horizontal untuk profile cards
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-            child: Row(
-              children: [
-                // Profil 1
-                Container(
-                  width: 250,
-                  margin: const EdgeInsets.only(right: 16),
-                  padding: const EdgeInsets.symmetric(vertical: 32),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: const [
-                      CircleAvatar(
-                        radius: avatarRadius,
-                        backgroundImage: AssetImage(
-                          "lib/assets/images/sasi.jpeg",
-                        ),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Scroll horizontal untuk profile cards
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Profil 1
+                    Container(
+                      width: 250,
+                      margin: const EdgeInsets.only(right: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white,
                       ),
-                      SizedBox(height: 20),
-                      Text(
-                        'Sasi Kirana',
-                        style: TextStyle(
-                          fontSize: nameFontSize,
-                          fontWeight: FontWeight.normal,
-                        ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: avatarRadius,
+                            backgroundImage: const NetworkImage(
+                              "https://www.meme-arsenal.com/memes/0e2a84558b6538368956825487221f38.jpg",
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Sasi Kirana',
+                            style: TextStyle(
+                              fontSize: nameFontSize,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            '11 PPLG 1',
+                            style: TextStyle(fontSize: emailFontSize),
+                          ),
+                          const Text(
+                            'Absen : 35',
+                            style: TextStyle(fontSize: emailFontSize),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        '11 PPLG 1',
-                        style: TextStyle(fontSize: emailFontSize),
-                      ),
-                      Text(
-                        'Absen : 35',
-                        style: TextStyle(fontSize: emailFontSize),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
 
-                // Profil 2
-                Container(
-                  width: 250,
-                  margin: const EdgeInsets.only(right: 16),
-                  padding: const EdgeInsets.symmetric(vertical: 32),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Column(
-                    children: const [
-                      CircleAvatar(
-                        radius: avatarRadius,
-                        backgroundImage: AssetImage(
-                          "lib/assets/images/enriko.jpeg",
-                        ),
+                    // Profil 2
+                    Container(
+                      width: 250,
+                      margin: const EdgeInsets.only(right: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      SizedBox(height: 20),
-                      Text(
-                        'Enriko Raina P.',
-                        style: TextStyle(
-                          fontSize: nameFontSize,
-                          fontWeight: FontWeight.normal,
-                        ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: avatarRadius,
+                            backgroundImage: const NetworkImage(
+                              "https://i1.sndcdn.com/artworks-kLM9u0CWqrXuM7Vo-K3CSuw-t500x500.png",
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Enriko Raina P.',
+                            style: TextStyle(
+                              fontSize: nameFontSize,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            '11 PPLG 1',
+                            style: TextStyle(fontSize: emailFontSize),
+                          ),
+                          const Text(
+                            'Absen : 12',
+                            style: TextStyle(fontSize: emailFontSize),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        '11 PPLG 1',
-                        style: TextStyle(fontSize: emailFontSize),
-                      ),
-                      Text(
-                        'Absen : 12',
-                        style: TextStyle(fontSize: emailFontSize),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: CustomButton(
-              text: "Logout",
-              color: Colors.red,
-              textColor: Colors.white,
-              onPressed: () {
-                Get.defaultDialog(
-                  title: "Confirm Logout",
-                  middleText: "Are you sure you want to log-out?",
-                  textCancel: "Cancel",
-                  textConfirm: "Logout",
-                  confirmTextColor: const Color.fromARGB(255, 201, 0, 0),
-                  onConfirm: () {
-                    Get.offAllNamed(Routes.login);
-                  },
-                );
-              },
-              borderRadius: 12,
-              elevation: 1,
-            ),
+              const SizedBox(height: 30),
+
+              // Tombol Logout
+              CustomButton(
+                text: "Logout",
+                color: Colors.red,
+                textColor: Colors.white,
+                onPressed: () {
+                  Get.defaultDialog(
+                    title: "Confirm Logout",
+                    middleText: "Are you sure you want to log-out?",
+                    textCancel: "Cancel",
+                    textConfirm: "Logout",
+                    confirmTextColor: const Color.fromARGB(255, 255, 255, 255),
+                    onConfirm: () {
+                      Get.offAllNamed(Routes.login);
+                    },
+                  );
+                },
+                borderRadius: 12,
+                elevation: 1,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

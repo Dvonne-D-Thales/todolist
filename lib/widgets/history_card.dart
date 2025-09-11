@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HistoryCard extends StatelessWidget {
   final String title;
   final String description;
-  final String category; // Tambahkan ini
+  final String category;
   final VoidCallback? onDelete;
   final List<Widget> children;
 
@@ -11,14 +11,28 @@ class HistoryCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.category, // Tambahkan ini
+    required this.category,
     this.onDelete,
     required this.children,
   });
 
+  Color _getCategoryColor() {
+    switch (category.toLowerCase()) {
+      case "personal":
+        return Colors.green.shade100;
+      case "school":
+        return Colors.yellow.shade100;
+      case "business":
+        return Colors.lightBlue.shade100;
+      default:
+        return Colors.grey.shade200;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: _getCategoryColor(),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +64,6 @@ class HistoryCard extends StatelessWidget {
             ...children,
           ],
         ),
-        
       ),
     );
   }

@@ -37,15 +37,38 @@ class TodoController extends GetxController {
     }
   }
 
-  void handleDelete(BuildContext context, int index) {
+  
+  void confirmDelete(BuildContext context, int index) {
     final title = todos[index].title;
-    deleteTodo(index);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Deleted $title')),
+    Get.defaultDialog(
+      title: "Konfirmasi",
+      middleText: "Apakah kamu yakin ingin menghapus '$title'?",
+      textCancel: "Batal",
+      textConfirm: "Hapus",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        deleteTodo(index);
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Deleted $title")),
+        );
+      },
     );
   }
 
-  void handleToggle(int index) {
-    toggleTodo(index);
+
+  void confirmToggle(int index) {
+    final title = todos[index].title;
+    Get.defaultDialog(
+      title: "Konfirmasi",
+      middleText: "Tandai '$title' sebagai selesai?",
+      textCancel: "Batal",
+      textConfirm: "Ya",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        toggleTodo(index);
+        Get.back();
+      },
+    );
   }
 }

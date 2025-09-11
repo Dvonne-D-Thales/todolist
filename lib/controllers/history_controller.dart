@@ -15,9 +15,19 @@ class HistoryController extends GetxController {
 
   void handleDelete(BuildContext context, int index) {
     final title = history[index].title;
-    deleteHistory(index);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Deleted $title from history')),
+    Get.defaultDialog(
+      title: "Konfirmasi",
+      middleText: "Apakah kamu yakin ingin menghapus '$title' dari history?",
+      textCancel: "Batal",
+      textConfirm: "Hapus",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        deleteHistory(index);
+        Get.back();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Deleted $title")),
+        );
+      },
     );
   }
 }

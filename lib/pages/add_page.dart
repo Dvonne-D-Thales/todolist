@@ -47,17 +47,18 @@ class AddPage extends StatelessWidget {
               const SizedBox(height: 20),
               const Text("Kategori", style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8),
-              DropdownButtonfield(
-                onChanged: controller.setCategory,
-              ),
+              DropdownButtonfield(onChanged: controller.setCategory),
               const SizedBox(height: 32),
-              SizedBox(
-                width: double.infinity,
+              Center(
                 child: CustomButton(
-                  text: 'Simpan',
-                  onPressed: controller.saveTask,
-                  borderRadius: 5,
-                  elevation: 2,
+                  text: "Simpan",
+                  color: Colors.deepPurple,
+                  textColor: Colors.white,
+                  onPressed: () {
+                    controller.saveTask(context);
+                  },
+                  borderRadius: 16,
+                  elevation: 4,
                 ),
               ),
             ],

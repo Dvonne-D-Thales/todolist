@@ -5,7 +5,6 @@ import 'package:todolist/controllers/todolist_controller.dart';
 class AddController extends GetxController {
   final titleController = TextEditingController();
   final descController = TextEditingController();
-
   final todoController = Get.find<TodoController>();
 
   /// simpan kategori yang dipilih
@@ -17,16 +16,26 @@ class AddController extends GetxController {
     }
   }
 
-  void saveTask() {
+  void saveTask(BuildContext context) {
     if (titleController.text.trim().isEmpty ||
         descController.text.trim().isEmpty ||
         category.value.isEmpty) {
-      Get.snackbar(
-        "Error",
-        "Judul, deskripsi, dan kategori harus diisi",
-        snackPosition: SnackPosition.BOTTOM,
-        // ignore: deprecated_member_use
-        backgroundColor: Colors.red.withOpacity(0.2),
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("warning"),
+            content: const Text("Tolong isi semua field"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
       );
     } else {
       todoController.addTodo(

@@ -10,7 +10,11 @@ class DropdownButtonfield extends StatelessWidget {
     this.onChanged,
   });
 
-  final List<String> items = const ["School", "Business", "Personal"];
+  final List<Map<String, dynamic>> items = const [
+    {"label": "School", "icon": Icons.school},
+    {"label": "Business", "icon": Icons.business_center},
+    {"label": "Personal", "icon": Icons.person},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +23,17 @@ class DropdownButtonfield extends StatelessWidget {
         labelText: "Kategori",
         border: OutlineInputBorder(),
       ),
-      value: value, // value dikontrol dari luar
-      items: items.map((String item) {
+      value: value,
+      items: items.map((item) {
         return DropdownMenuItem<String>(
-          value: item,
-          child: Text(item),
+          value: item["label"],
+          child: Row(
+            children: [
+              Icon(item["icon"], size: 20, color: Colors.deepPurple),
+              const SizedBox(width: 8),
+              Text(item["label"]),
+            ],
+          ),
         );
       }).toList(),
       onChanged: onChanged,

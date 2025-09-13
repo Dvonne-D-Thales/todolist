@@ -34,7 +34,8 @@ class AddController extends GetxController {
         descController.text.trim(),
         category.value, // kirim kategori juga
       );
-      Get.offAllNamed(Routes.todoList); // balik ke TodoListPage
+      Get.closeAllSnackbars();
+      Get.offAllNamed(Routes.mainmenu); // balik ke TodoListPage
       Get.snackbar(
         "Sukses",
         "Tugas berhasil ditambahkan",

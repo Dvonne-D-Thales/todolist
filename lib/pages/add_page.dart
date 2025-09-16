@@ -19,7 +19,7 @@ class AddPage extends StatelessWidget {
         title: const Text("Tambah Tugas"),
         backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       ),
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: CostumCard(

@@ -43,6 +43,10 @@ class AddController extends GetxController {
         descController.text.trim(),
         category.value, // kirim kategori juga
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${titleController.text} berhasil ditambahkan")),
+      );
+
       Get.back(); // balik ke TodoListPage
     }
   }

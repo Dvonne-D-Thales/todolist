@@ -46,7 +46,7 @@ class AddPage extends StatelessWidget {
                       "Error",
                       "Judul dan deskripsi harus diisi",
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red.withOpacity(0.2),
+                      backgroundColor: Colors.red,
                     );
                   } else {
                     todoController.addTodo(
@@ -58,7 +58,7 @@ class AddPage extends StatelessWidget {
                       "Sukses",
                       "Tugas berhasil ditambahkan",
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.green.withOpacity(0.2),
+                      backgroundColor: Colors.green,
                     );
                   }
                 },

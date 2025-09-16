@@ -48,10 +48,11 @@ class TodoController extends GetxController {
       confirmTextColor: Colors.white,
       onConfirm: () {
         deleteTodo(index);
-        Get.back();
+        
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Deleted $title")),
         );
+        Get.back();
       },
     );
   }

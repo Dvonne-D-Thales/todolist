@@ -6,17 +6,16 @@ import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/costum_card.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
+class LoginController extends GetxController {
+  var obscurePassword = true.obs;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool _obscurePassword = true;
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+
+  final loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
                       child: const CircleAvatar(
                         radius: 40,
                         backgroundColor: Color(0xFFEEEEEE),
@@ -62,29 +61,31 @@ class _LoginPageState extends State<LoginPage> {
                       "Login to continue",
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.grey[700],
+                        color: Colors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 36),
                     CustomTextField(
                       label: "Username",
-                      controller: emailController,
+                      controller: loginController.emailController,
                       prefixIcon: Icons.person,
                       maxLines: 1,
                     ),
                     const SizedBox(height: 20),
-                    CustomTextField(
-                      label: "Password",
-                      controller: passwordController,
-                      isPassword: true,
-                      obscureText: _obscurePassword,
-                      onToggleVisibility: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                      maxLines: 1, prefixIcon: Icons.lock,
+                    Obx(
+                      () => CustomTextField(
+                        label: "Password",
+                        controller: loginController.passwordController,
+                        isPassword: true,
+                        obscureText: loginController.obscurePassword.value,
+                        onToggleVisibility: () {
+                          loginController.obscurePassword.value =
+                              !loginController.obscurePassword.value;
+                        },
+                        maxLines: 1,
+                        prefixIcon: Icons.lock,
+                      ),
                     ),
                     const SizedBox(height: 28),
                     CustomButton(
@@ -94,17 +95,15 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         final authController = Get.find<AuthController>();
                         authController.login(
-                          context,
-                          emailController.text.trim(),
-                          passwordController.text.trim(),
-                          emailController,
-                          passwordController,
+                          loginController.emailController.text.trim(),
+                          loginController.passwordController.text.trim(),
+                          loginController.emailController,
+                          loginController.passwordController,
                         );
                       },
                       borderRadius: 16,
                       elevation: 4,
                     ),
-
                     const SizedBox(height: 14),
                     CustomButton(
                       text: "Register",
@@ -114,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
+                            builder: (context) =>  RegisterPage(),
                           ),
                         );
                       },

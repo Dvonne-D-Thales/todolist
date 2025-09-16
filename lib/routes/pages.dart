@@ -13,8 +13,8 @@ import 'package:todolist/pages/todolist_page.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: '/login', page: () => const LoginPage()),
-    GetPage(name: '/register', page: () => const RegisterPage()),
+    GetPage(name: '/login', page: () =>  LoginPage()),
+    GetPage(name: '/register', page: () =>  RegisterPage()),
     GetPage(
       name: '/mainmenu',
       page: () => MainmenuPage(),

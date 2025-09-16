@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/controllers/navdrawer_controller.dart';
+
 import 'package:todolist/controllers/navbar_controller.dart';
 
 class MainmenuPage extends StatelessWidget {
@@ -8,12 +8,11 @@ class MainmenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavDrawerController navC = Get.put(NavDrawerController());
     final NavbarController navbarC = Get.put(NavbarController());
 
     return Scaffold(
       body: Obx(() {
-        return navC.pages[navbarC.selectedIndex.value];
+        return navbarC.pages[navbarC.selectedIndex.value];
       }),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(

@@ -3,63 +3,43 @@ import 'package:get/get.dart';
 import 'package:todolist/routes/routes.dart';
 
 class AuthController extends GetxController {
-  final correctUsername = "sasiEnriko";
-  final correctPassword = "jangkarLaut";
+  final correctUsername = "a";
+  final correctPassword = "a";
 
-  void login(BuildContext context, String email, String password,
-      TextEditingController emailController, TextEditingController passwordController) {
+  void login(
+    String email,
+    String password,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) {
     if (email == correctUsername && password == correctPassword) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Login Successful"),
-            content: Text("Welcome, $email!"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Get.offAllNamed(Routes.mainmenu);
-                },
-                child: const Text("OK"),
-              ),
-            ],
-          );
+      Get.defaultDialog(
+        title: "Login Successful",
+        middleText: "Welcome, $email!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.offAllNamed(Routes.mainmenu);
         },
       );
     } else if (email.isEmpty && password.isEmpty) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Input Please"),
-            content: const Text("input email dan password kosong"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("OK"),
-              ),
-            ],
-          );
+      Get.defaultDialog(
+        title: "Input Please",
+        middleText: "Input email dan password kosong",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back(); // tutup dialog
         },
       );
     } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("PEYUSUP!!!"),
-            content: const Text("penyusup tidak dikenal, silahkan coba lagi"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("OK"),
-              ),
-            ],
-          );
+      Get.defaultDialog(
+        title: "PEYUSUP!!!",
+        middleText: "Penyusup tidak dikenal, silahkan coba lagi",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back(); // tutup dialog
         },
       );
 

@@ -6,6 +6,17 @@ import 'package:todolist/models/todolist_model.dart';
 class TodoController extends GetxController {
   var todos = <TodoItem>[].obs;
 
+  // 🔹 untuk animasi FAB
+  var turns = 0.0.obs;
+
+  void rotateAndNavigate() {
+    turns.value += 10;
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      Get.toNamed('/add_page');
+    });
+  }
+
   void addTodo(String title, String description, String category) {
     final newTodo = TodoItem(
       title: title,
@@ -32,12 +43,10 @@ class TodoController extends GetxController {
     if (updatedtodo.isDone) {
       final historyController = Get.find<HistoryController>();
       historyController.addToHistory(updatedtodo);
-
       todos.removeAt(index);
     }
   }
 
-  
   void confirmDelete(BuildContext context, int index) {
     final title = todos[index].title;
     Get.defaultDialog(
@@ -56,7 +65,6 @@ class TodoController extends GetxController {
       },
     );
   }
-
 
   void confirmToggle(int index) {
     final title = todos[index].title;

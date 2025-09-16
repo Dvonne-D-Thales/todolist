@@ -11,6 +11,13 @@ class AddPage extends StatelessWidget {
 
   final AddController controller = Get.put(AddController());
 
+  // 👉 Item dropdown sekarang diatur di page
+  final List<Map<String, dynamic>> categories = const [
+    {"label": "School", "icon": Icons.school},
+    {"label": "Business", "icon": Icons.business_center},
+    {"label": "Personal", "icon": Icons.person},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +26,6 @@ class AddPage extends StatelessWidget {
         title: const Text("Tambah Tugas"),
         backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       ),
-      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: CostumCard(
@@ -35,6 +41,7 @@ class AddPage extends StatelessWidget {
                 maxLines: 1,
                 prefixIcon: Icons.title,
               ),
+
               const SizedBox(height: 20),
               const Text("Deskripsi", style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8),
@@ -44,10 +51,18 @@ class AddPage extends StatelessWidget {
                 maxLines: 3,
                 prefixIcon: Icons.description,
               ),
+
               const SizedBox(height: 20),
               const Text("Kategori", style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8),
-              DropdownButtonfield(onChanged: controller.setCategory),
+              DropdownButtonfield(
+                value: controller.category.value.isEmpty
+                    ? null
+                    : controller.category.value,
+                items: categories, 
+                onChanged: controller.setCategory,
+              ),
+              
               const SizedBox(height: 32),
               Center(
                 child: CustomButton(

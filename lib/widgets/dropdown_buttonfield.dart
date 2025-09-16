@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 class DropdownButtonfield extends StatelessWidget {
   final String? value;
   final Function(String?)? onChanged;
+  final List<Map<String, dynamic>> items; 
 
   const DropdownButtonfield({
     super.key,
     this.value,
     this.onChanged,
+    required this.items,
   });
-
-  final List<Map<String, dynamic>> items = const [
-    {"label": "School", "icon": Icons.school},
-    {"label": "Business", "icon": Icons.business_center},
-    {"label": "Personal", "icon": Icons.person},
-  ];
 
   @override
   Widget build(BuildContext context) {

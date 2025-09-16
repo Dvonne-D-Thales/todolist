@@ -43,14 +43,11 @@ class AddController extends GetxController {
         descController.text.trim(),
         category.value, // kirim kategori juga
       );
-      Get.back(); // balik ke TodoListPage
-      Get.snackbar(
-        "Sukses",
-        "Tugas berhasil ditambahkan",
-        snackPosition: SnackPosition.BOTTOM,
-        // ignore: deprecated_member_use
-        backgroundColor: Colors.green.withOpacity(0.2),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${titleController.text} berhasil ditambahkan")),
       );
+
+      Get.back(); // balik ke TodoListPage
     }
   }
 

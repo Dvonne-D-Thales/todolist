@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todolist/controllers/register_controller.dart';
 import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/datetime.dart';
 import 'package:todolist/widgets/costum_card.dart';
 
-DateTime? birthDate;
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final registerController = Get.put(RegisterController());
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 230, 240, 250),
+        elevation: 0,
+      ),
       body: Container(
         decoration: const BoxDecoration(
-         color:  Color.fromARGB(255, 230, 240, 250)
+          color: Color.fromARGB(255, 230, 240, 250),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -42,34 +48,37 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    CustomTextField(label: "Name", controller: nameController, maxLines: 1, prefixIcon: Icons.person,),
                     const SizedBox(height: 20),
                     CustomTextField(
                       label: "Username",
-                      controller: usernameController, maxLines: 1, prefixIcon: Icons.person,
+                      controller: registerController.usernameController,
+                      maxLines: 1,
+                      prefixIcon: Icons.person,
                     ),
                     const SizedBox(height: 20),
-                    CustomTextField(
-                      label: "Password",
-                      controller: passwordController,
-                      isPassword: true,
-                      obscureText: _obscurePassword,
-                      onToggleVisibility: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                      maxLines: 1, prefixIcon: Icons.lock,
+                    Obx(
+                      () => CustomTextField(
+                        label: "Password",
+                        controller: registerController.passwordController,
+                        isPassword: true,
+                        obscureText: registerController.obscurePassword.value,
+                        onToggleVisibility: () {
+                          registerController.obscurePassword.value =
+                              !registerController.obscurePassword.value;
+                        },
+                        maxLines: 1,
+                        prefixIcon: Icons.lock,
+                      ),
                     ),
                     const SizedBox(height: 20),
-                    CustomDateField(
-                      label: "Tanggal Lahir",
-                      selectedDate: birthDate,
-                      onDateSelected: (date) {
-                        setState(() {
-                          birthDate = date;
-                        });
-                      },
+                    Obx(
+                      () => CustomDateField(
+                        label: "Tanggal Lahir",
+                        selectedDate: registerController.birthDate.value,
+                        onDateSelected: (date) {
+                          registerController.birthDate.value = date;
+                        },
+                      ),
                     ),
                     const SizedBox(height: 40),
                     Container(
@@ -78,10 +87,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: CustomButton(
                           text: "Register",
                           onPressed: () {
-                            if (nameController.text.isEmpty ||
-                                usernameController.text.isEmpty ||
-                                passwordController.text.isEmpty ||
-                                birthDate == null) {
+                            if (registerController
+                                    .usernameController
+                                    .text
+                                    .isEmpty ||
+                                registerController
+                                    .passwordController
+                                    .text
+                                    .isEmpty ||
+                                registerController.birthDate.value == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Please fill all fields"),
@@ -91,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
+                                  builder: (context) => LoginPage(),
                                 ),
                               );
                             }

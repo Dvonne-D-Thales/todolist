@@ -65,6 +65,7 @@ class LoginPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+
                     const SizedBox(height: 36),
                     CustomTextField(
                       label: "Username",
@@ -87,6 +88,7 @@ class LoginPage extends StatelessWidget {
                         prefixIcon: Icons.lock,
                       ),
                     ),
+                    
                     const SizedBox(height: 28),
                     CustomButton(
                       text: "Login",

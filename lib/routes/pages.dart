@@ -10,29 +10,30 @@ import 'package:todolist/pages/mainmenu_page.dart';
 import 'package:todolist/pages/profile_page.dart';
 import 'package:todolist/pages/register_page.dart';
 import 'package:todolist/pages/todolist_page.dart';
+import 'package:todolist/routes/routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: '/login', page: () =>  LoginPage()),
+    GetPage(name: Routes.login, page: () =>  LoginPage()),
     GetPage(name: '/register', page: () =>  RegisterPage()),
     GetPage(
-      name: '/mainmenu',
+      name: Routes.mainmenu,
       page: () => MainmenuPage(),
       binding: MainmenupageBinding(),
     ),
     GetPage(
-      name: '/todolist',
+      name: Routes.todoList,
       page: () => TodoListPage(),
       binding: TodolistBinding(),
     ),
     GetPage(
-      name: '/history',
+      name: Routes.history,
       page: () => const HistoryPage(),
       binding: HistoryBinding(),
     ),
-    GetPage(name: '/profile', page: () => const ProfilePage()),
+    GetPage(name: Routes.history, page: () => const ProfilePage()),
     GetPage(
-      name: '/add_page',
+      name: Routes.addTodo,
       page: () => AddPage(),
       binding: AddBinding(),
     ), // Pastikan halaman AddTodoPage sudah dibuat

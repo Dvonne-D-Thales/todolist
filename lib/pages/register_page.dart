@@ -6,6 +6,7 @@ import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/datetime.dart';
 import 'package:todolist/widgets/costum_card.dart';
+import 'package:todolist/widgets/costum_text.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -40,13 +41,7 @@ class RegisterPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Register",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    CostumText.heading('Register'),
                     const SizedBox(height: 30),
                     const SizedBox(height: 20),
                     CustomTextField(

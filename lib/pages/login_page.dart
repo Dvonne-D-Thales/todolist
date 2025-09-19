@@ -5,6 +5,7 @@ import 'package:todolist/pages/register_page.dart';
 import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/costum_card.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
+import 'package:todolist/widgets/costum_text.dart';
 
 class LoginController extends GetxController {
   var obscurePassword = true.obs;
@@ -47,25 +48,8 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'Welcome',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      "Login to continue",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-
+                    CostumText.heading('Welcome'),
+                    CostumText.subtitle("Login to continue"),
                     const SizedBox(height: 36),
                     CustomTextField(
                       label: "Username",
@@ -88,7 +72,7 @@ class LoginPage extends StatelessWidget {
                         prefixIcon: Icons.lock,
                       ),
                     ),
-                    
+
                     const SizedBox(height: 28),
                     CustomButton(
                       text: "Login",
@@ -115,7 +99,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  RegisterPage(),
+                            builder: (context) => RegisterPage(),
                           ),
                         );
                       },

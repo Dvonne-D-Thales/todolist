@@ -9,6 +9,7 @@ import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/pages/mainmenu_page.dart';
 import 'package:todolist/pages/profile_page.dart';
 import 'package:todolist/pages/register_page.dart';
+import 'package:todolist/pages/splashscreen_page.dart';
 import 'package:todolist/pages/todolist_page.dart';
 import 'package:todolist/routes/routes.dart';
 
@@ -21,21 +22,31 @@ class AppPages {
       page: () => MainmenuPage(),
       binding: MainmenupageBinding(),
     ),
+
     GetPage(
       name: Routes.todoList,
       page: () => TodoListPage(),
       binding: TodolistBinding(),
     ),
+
     GetPage(
       name: Routes.history,
       page: () => const HistoryPage(),
       binding: HistoryBinding(),
     ),
-    GetPage(name: Routes.history, page: () => const ProfilePage()),
+
+    GetPage(name: Routes.history, 
+    page: () => const ProfilePage()
+    ),
+    
     GetPage(
       name: Routes.addTodo,
       page: () => AddPage(),
       binding: AddBinding(),
-    ), // Pastikan halaman AddTodoPage sudah dibuat
+    ),
+
+    GetPage(name: Routes.splashscreen, 
+    page: () => SplashscreenPage()
+    ),
   ];
 }

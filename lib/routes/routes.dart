@@ -6,5 +6,5 @@ class Routes {
   static const String history = '/history';
   static const String addTodo = '/add';
   static const String mainmenu = '/mainmenu';
-  
+  static const String splashscreen = '/splashscreen';
 }

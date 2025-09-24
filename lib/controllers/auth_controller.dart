@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:todolist/routes/routes.dart';
 
 class AuthController extends GetxController {
-  final correctUsername = "sasiEnriko";
-  final correctPassword = "jangkarLaut";
+  final correctUsername = "a";
+  final correctPassword = "a";
 
   void login(
     String email,

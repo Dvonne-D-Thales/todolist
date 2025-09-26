@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 
-class TodoCard extends StatelessWidget {
+class HistoryCard extends StatelessWidget {
   final String title;
   final String description;
   final String category;
   final VoidCallback? onDelete;
-  final bool isDone;
-  final VoidCallback? onCheck;
+  final List<Widget> children;
 
-  const TodoCard({
+  const HistoryCard({
     super.key,
     required this.title,
     required this.description,
     required this.category,
     this.onDelete,
-    this.isDone = false,
-    this.onCheck,
+    required this.children,
   });
 
   Color _getCategoryColor() {
     switch (category.toLowerCase()) {
       case "personal":
-        return Colors.green.shade100; // hijau muda
+        return Colors.green.shade100;
       case "school":
-        return Colors.yellow.shade100; // kuning lembut
+        return Colors.yellow.shade100;
       case "business":
-        return Colors.lightBlue.shade100; // biru muda
+        return Colors.lightBlue.shade100;
       default:
-        return Colors.grey.shade200; // fallback warna netral
+        return Colors.grey.shade200;
     }
   }
 
@@ -36,29 +34,35 @@ class TodoCard extends StatelessWidget {
     return Card(
       color: _getCategoryColor(),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        leading: IconButton(
-          icon: Icon(isDone ? Icons.check_box : Icons.check_box_outline_blank),
-          onPressed: onCheck,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                if (onDelete != null)
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: onDelete,
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
             Text(description),
             const SizedBox(height: 4),
             Text(
               'Category: $category',
               style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
             ),
+            const SizedBox(height: 12),
+            ...children,
           ],
-        ),
-        trailing: IconButton(
-          icon: const Icon(Icons.delete),
-          onPressed: onDelete,
         ),
       ),
     );

@@ -5,11 +5,37 @@ import 'package:todolist/controllers/todolist_controller.dart';
 class AddController extends GetxController {
   final titleController = TextEditingController();
   final descController = TextEditingController();
-
   final todoController = Get.find<TodoController>();
 
-  void saveTask() {
+  /// simpan kategori yang dipilih
+  final RxString category = "".obs;
+
+  void setCategory(String? value) {
+    if (value != null) {
+      category.value = value;
+    }
+  }
+
+  void saveTask(BuildContext context) {
     if (titleController.text.trim().isEmpty ||
+        descController.text.trim().isEmpty ||
+        category.value.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("warning"),
+            content: const Text("Tolong isi semua field"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
         descController.text.trim().isEmpty) {
       Get.snackbar(
         "Error",
@@ -21,7 +47,12 @@ class AddController extends GetxController {
       todoController.addTodo(
         titleController.text.trim(),
         descController.text.trim(),
+        category.value, // kirim kategori juga
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${titleController.text} berhasil ditambahkan")),
+      );
+
       Get.back(); // balik ke TodoListPage
       Get.snackbar(
         "Sukses",

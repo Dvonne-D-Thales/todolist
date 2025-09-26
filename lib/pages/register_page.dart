@@ -1,93 +1,118 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todolist/controllers/register_controller.dart';
 import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/datetime.dart';
+import 'package:todolist/widgets/costum_card.dart';
+import 'package:todolist/widgets/costum_text.dart';
 
-DateTime? birthDate;
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
-
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Register Page")),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Register",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 30),
-                CustomTextField(
-                  label: "Name",
-                  controller: nameController,
-                ),
-                const SizedBox(height: 20),
-                CustomTextField(
-                  label: "Username",
-                  controller: usernameController,
-                ),
-                const SizedBox(height: 20),
-                CustomTextField(
-                  label: "Password",
-                  controller: passwordController,
-                  isPassword: true,
-                ),
-                const SizedBox(height: 20),
-                CustomDateField(
-                  label: "Tanggal Lahir",
-                  selectedDate: birthDate,
-                  onDateSelected: (date) {
-                    setState(() {
-                      birthDate = date;
-                    });
-                  },
-                ),
-                const SizedBox(height: 40),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Center(
-                    child: CustomButton(
-                      text: "Register",
-                      onPressed: () {
-                        if (nameController.text.isEmpty ||
-                            usernameController.text.isEmpty ||
-                            passwordController.text.isEmpty ||
-                            birthDate == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please fill all fields"),
-                            ),
-                          );
-                        } else {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginPage(),
-                            ),
-                          );
-                        }
-                      },
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 230, 240, 250),
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 230, 240, 250),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: CostumCard(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CostumText.heading('Register'),
+                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      label: "Username",
+                      controller: registerController.usernameController,
+                      maxLines: 1,
+                      prefixIcon: Icons.person,
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    Obx(
+                      () => CustomTextField(
+                        label: "Password",
+                        controller: registerController.passwordController,
+                        isPassword: true,
+                        obscureText: registerController.obscurePassword.value,
+                        onToggleVisibility: () {
+                          registerController.obscurePassword.value =
+                              !registerController.obscurePassword.value;
+                        },
+                        maxLines: 1,
+                        prefixIcon: Icons.lock,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Obx(
+                      () => CustomDateField(
+                        label: "Tanggal Lahir",
+                        selectedDate: registerController.birthDate.value,
+                        onDateSelected: (date) {
+                          registerController.birthDate.value = date;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 50),
+                      child: Center(
+                        child: CustomButton(
+                          text: "Register",
+                          onPressed: () {
+                            if (registerController
+                                    .usernameController
+                                    .text
+                                    .isEmpty ||
+                                registerController
+                                    .passwordController
+                                    .text
+                                    .isEmpty ||
+                                registerController.birthDate.value == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Please fill all fields"),
+                                ),
+                              );
+                            } else {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                              );
+                            }
+                          },
+                          borderRadius: 12,
+                          elevation: 12,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

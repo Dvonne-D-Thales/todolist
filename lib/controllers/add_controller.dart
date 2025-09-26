@@ -36,12 +36,6 @@ class AddController extends GetxController {
             ],
           );
         },
-        descController.text.trim().isEmpty) {
-      Get.snackbar(
-        "Error",
-        "Judul dan deskripsi harus diisi",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
       );
     } else {
       todoController.addTodo(
@@ -54,12 +48,6 @@ class AddController extends GetxController {
       );
 
       Get.back(); // balik ke TodoListPage
-      Get.snackbar(
-        "Sukses",
-        "Tugas berhasil ditambahkan",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-      );
     }
   }
 

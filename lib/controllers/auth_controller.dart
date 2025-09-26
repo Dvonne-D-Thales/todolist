@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todolist/routes/routes.dart';
 
 class AuthController extends GetxController {
@@ -18,7 +19,9 @@ class AuthController extends GetxController {
         middleText: "Welcome, $email!",
         textConfirm: "OK",
         confirmTextColor: Colors.white,
-        onConfirm: () {
+        onConfirm: () async{
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setString("username", emailController.text.toString());
           Get.offAllNamed(Routes.mainmenu);
         },
       );

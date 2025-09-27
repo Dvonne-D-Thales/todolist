@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/routes/routes.dart';
+import 'package:todolist/controllers/auth_controller.dart';
 import 'package:todolist/widgets/custom_button.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -125,10 +125,8 @@ class ProfilePage extends StatelessWidget {
                     textCancel: "Cancel",
                     textConfirm: "Logout",
                     confirmTextColor: const Color.fromARGB(255, 255, 255, 255),
-                    onConfirm: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      await prefs.remove("username");
-                      Get.offAllNamed(Routes.login);
+                    onConfirm: () {
+                      controller.logout();
                     },
                   );
                 },

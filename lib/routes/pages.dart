@@ -17,7 +17,7 @@ import 'package:todolist/routes/routes.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.login, page: () =>  LoginPage()),
-    GetPage(name: '/register', page: () =>  RegisterPage()),
+    GetPage(name: Routes.register, page: () =>  RegisterPage()),
     GetPage(
       name: Routes.mainmenu,
       page: () => MainmenuPage(),
@@ -32,12 +32,12 @@ class AppPages {
 
     GetPage(
       name: Routes.history,
-      page: () => const HistoryPage(),
+      page: () => HistoryPage(),
       binding: HistoryBinding(),
     ),
 
     GetPage(name: Routes.history, 
-    page: () => const ProfilePage()
+    page: () => ProfilePage()
     ),
     
     GetPage(

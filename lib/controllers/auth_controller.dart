@@ -7,6 +7,12 @@ class AuthController extends GetxController {
   final correctUsername = "a";
   final correctPassword = "a";
 
+  void logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("username"); 
+    Get.offAllNamed(Routes.login);
+    }
+
   void login(
     String email,
     String password,

@@ -24,7 +24,7 @@ class SplashscreenPage extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
-                  Icons.check_circle_outline,
+                  Icons.anchor,
                   color: Colors.white,
                   size: 80,
                 ),
@@ -38,7 +38,7 @@ class SplashscreenPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Teks loading
-              CostumText.heading('Loading...'),
+              CostumText.heading('authorization...'),
             ],
           ),
         ),

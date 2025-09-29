@@ -7,9 +7,9 @@ class NavbarController extends GetxController {
   RxInt selectedIndex = 0.obs;
   
     final pages = [
-    const TodoListPage(),
-    const HistoryPage(),
-    const ProfilePage(),
+    TodoListPage(),
+    HistoryPage(),
+    ProfilePage(),
   ];
 
   void changeTab(int index) {

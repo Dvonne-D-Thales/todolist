@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/routes/routes.dart';
+import 'package:todolist/controllers/auth_controller.dart';
 import 'package:todolist/widgets/custom_button.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,7 @@ class ProfilePage extends StatelessWidget {
                     textConfirm: "Logout",
                     confirmTextColor: const Color.fromARGB(255, 255, 255, 255),
                     onConfirm: () {
-                      Get.offAllNamed(Routes.login);
+                      controller.logout();
                     },
                   );
                 },

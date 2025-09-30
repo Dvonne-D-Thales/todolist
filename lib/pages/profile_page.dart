@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/routes/routes.dart';
+import 'package:todolist/controllers/auth_controller.dart';
 import 'package:todolist/widgets/custom_button.dart';
+import 'package:todolist/widgets/costum_text.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class ProfilePage extends StatelessWidget {
         title: const Text('Profile'),
       ),
       body: Center(
+        
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
           child: Column(
@@ -49,22 +52,11 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const Text(
-                            'Sasi Kirana',
-                            style: TextStyle(
-                              fontSize: nameFontSize,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
+                          CostumText("Sasi Kirana"),
+                          
                           const SizedBox(height: 8),
-                          const Text(
-                            '11 PPLG 1',
-                            style: TextStyle(fontSize: emailFontSize),
-                          ),
-                          const Text(
-                            'Absen : 35',
-                            style: TextStyle(fontSize: emailFontSize),
-                          ),
+                          CostumText("11 PPLG 1"),
+                          CostumText("Absen : 35"),
                         ],
                       ),
                     ),
@@ -87,22 +79,10 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const Text(
-                            'Enriko Raina P.',
-                            style: TextStyle(
-                              fontSize: nameFontSize,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
+                          CostumText("Enriko Raina P."),
                           const SizedBox(height: 8),
-                          const Text(
-                            '11 PPLG 1',
-                            style: TextStyle(fontSize: emailFontSize),
-                          ),
-                          const Text(
-                            'Absen : 12',
-                            style: TextStyle(fontSize: emailFontSize),
-                          ),
+                          CostumText("11 PPLG 1"),
+                          CostumText("Absen : 12"),
                         ],
                       ),
                     ),
@@ -125,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                     textConfirm: "Logout",
                     confirmTextColor: const Color.fromARGB(255, 255, 255, 255),
                     onConfirm: () {
-                      Get.offAllNamed(Routes.login);
+                      controller.logout();
                     },
                   );
                 },

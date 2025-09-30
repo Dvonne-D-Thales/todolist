@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todolist/routes/routes.dart';
 
 class AuthController extends GetxController {
-  final correctUsername = "sasiEnriko";
-  final correctPassword = "jangkarLaut";
+  final correctUsername = "a";
+  final correctPassword = "a";
+
+  void logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("username"); 
+    Get.offAllNamed(Routes.login);
+    }
 
   void login(
     String email,
@@ -18,8 +25,10 @@ class AuthController extends GetxController {
         middleText: "Welcome, $email!",
         textConfirm: "OK",
         confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.offAllNamed(Routes.mainmenu);
+        onConfirm: () async{
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setString("username", emailController.text.toString());
+          Get.offAllNamed(Routes.splashscreen);
         },
       );
     } else if (email.isEmpty && password.isEmpty) {

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:todolist/controllers/history_controller.dart';
 import 'package:todolist/models/todolist_model.dart';
+import 'package:todolist/routes/routes.dart';
 
 class TodoController extends GetxController {
   var todos = <TodoItem>[].obs;
@@ -13,7 +14,7 @@ class TodoController extends GetxController {
     turns.value += 10;
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      Get.toNamed('/add_page');
+      Get.toNamed(Routes.addTodo);
     });
   }
 

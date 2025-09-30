@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:todolist/bindings/addpage_binding.dart';
 import 'package:todolist/bindings/history_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
+import 'package:todolist/bindings/splashscreen_binding.dart';
 import 'package:todolist/bindings/todolist_binding.dart';
 import 'package:todolist/pages/add_page.dart';
 import 'package:todolist/pages/history_page.dart';
@@ -16,7 +17,7 @@ import 'package:todolist/routes/routes.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.login, page: () =>  LoginPage()),
-    GetPage(name: '/register', page: () =>  RegisterPage()),
+    GetPage(name: Routes.register, page: () =>  RegisterPage()),
     GetPage(
       name: Routes.mainmenu,
       page: () => MainmenuPage(),
@@ -31,12 +32,12 @@ class AppPages {
 
     GetPage(
       name: Routes.history,
-      page: () => const HistoryPage(),
+      page: () => HistoryPage(),
       binding: HistoryBinding(),
     ),
 
     GetPage(name: Routes.history, 
-    page: () => const ProfilePage()
+    page: () => ProfilePage()
     ),
     
     GetPage(
@@ -46,7 +47,8 @@ class AppPages {
     ),
 
     GetPage(name: Routes.splashscreen, 
-    page: () => SplashscreenPage()
+    page: () => SplashscreenPage(),
+    binding: SplashscreenBinding(),
     ),
   ];
 }

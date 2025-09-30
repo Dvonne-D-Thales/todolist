@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todolist/controllers/splashscreen_controller.dart';
 import 'package:todolist/widgets/costum_text.dart';
 
 class SplashscreenPage extends StatelessWidget {
-  const SplashscreenPage({super.key});
+  SplashscreenPage({super.key});
+  final controller = Get.find<SplashscreenController>();
 
   @override
   Widget build(BuildContext context) {

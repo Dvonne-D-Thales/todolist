@@ -11,9 +11,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double avatarRadius = 40;
-    const double nameFontSize = avatarRadius / 1.618;
-    const double emailFontSize = nameFontSize / 1.618;
-
+    
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(

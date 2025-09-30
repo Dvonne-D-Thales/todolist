@@ -20,17 +20,7 @@ class AuthController extends GetxController {
     TextEditingController passwordController,
   ) {
     if (email == correctUsername && password == correctPassword) {
-      Get.defaultDialog(
-        title: "Login Successful",
-        middleText: "Welcome, $email!",
-        textConfirm: "OK",
-        confirmTextColor: Colors.white,
-        onConfirm: () async{
-          final prefs = await SharedPreferences.getInstance();
-          prefs.setString("username", emailController.text.toString());
-          Get.offAllNamed(Routes.splashscreen);
-        },
-      );
+      Get.offAllNamed(Routes.splashscreen);
     } else if (email.isEmpty && password.isEmpty) {
       Get.defaultDialog(
         title: "Input Please",

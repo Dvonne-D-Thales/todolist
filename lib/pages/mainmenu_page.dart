@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:todolist/controllers/navbar_controller.dart';
 
 class MainmenuPage extends StatelessWidget {
-  const MainmenuPage({super.key});
+  MainmenuPage({super.key});
+  final navbarC = Get.find<NavbarController>();
 
   @override
   Widget build(BuildContext context) {
-    final NavbarController navbarC = Get.put(NavbarController());
+    // final NavbarController navbarC = Get.put(NavbarController());
 
     return Scaffold(
       body: Obx(() {

@@ -6,21 +6,26 @@ import 'package:todolist/routes/routes.dart';
 class AuthController extends GetxController {
   final correctUsername = "a";
   final correctPassword = "a";
+  var obscurePassword = true.obs;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void logout() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove("username"); 
+    prefs.remove("username");
     Get.offAllNamed(Routes.login);
-    }
+  }
 
   void login(
     String email,
     String password,
     TextEditingController emailController,
     TextEditingController passwordController,
-  ) {
+  ) async{
     if (email == correctUsername && password == correctPassword) {
-      Get.offAllNamed(Routes.splashscreen);
+       final prefs = await SharedPreferences.getInstance();
+          prefs.setString("username", emailController.text.toString());
+          Get.offAllNamed(Routes.mainmenu);
     } else if (email.isEmpty && password.isEmpty) {
       Get.defaultDialog(
         title: "Input Please",
@@ -28,7 +33,7 @@ class AuthController extends GetxController {
         textConfirm: "OK",
         confirmTextColor: Colors.white,
         onConfirm: () {
-          Get.back(); // tutup dialog
+          Get.back; // tutup dialog
         },
       );
     } else {

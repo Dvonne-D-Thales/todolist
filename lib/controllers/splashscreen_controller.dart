@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todolist/routes/routes.dart';
 
-
 class SplashscreenController extends GetxController {
   @override
   void onInit() {
@@ -10,20 +9,19 @@ class SplashscreenController extends GetxController {
     checkLoginStatus();
   }
 
-checkLoginStatus() async {
-  final prefs = await SharedPreferences.getInstance();
+  Future<void> checkLoginStatus() async {
+    // Tampilkan splash selama 2-3 detik
+    await Future.delayed(const Duration(seconds: 3));
 
-  final savedUsername = prefs.getString('username');
-  if (savedUsername != null) {
-    // jika ada username, langsung ke main menu setelah delay
-    Future.delayed(const Duration(seconds: 3), () {
+    final prefs = await SharedPreferences.getInstance();
+    final savedUsername = prefs.getString('username');
+
+    if (savedUsername != null) {
+      // Sudah login -> lanjut ke main menu
       Get.offAllNamed(Routes.mainmenu);
-    });
-  } else {
-    // tambahkan delay sebelum ke login
-    Future.delayed(const Duration(seconds: 3), () {
+    } else {
+      // Belum login -> kembali ke login
       Get.offAllNamed(Routes.login);
-    });
+    }
   }
-}
 }

@@ -1,16 +1,35 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:todolist/models/todolist_model.dart';
+import 'package:todolist/database/todolist_crud.dart';
+
 
 class HistoryController extends GetxController {
   var history = <TodoItem>[].obs;
+  final TodoListDatabase _database = TodoListDatabase();
 
-  void addToHistory(TodoItem item) {
+  @override
+  void onInit() {
+    super.onInit();
+    loadHistory();
+  }
+
+  void loadHistory() async {
+    final loadedHistory = await _database.readHistory();
+    history.assignAll(loadedHistory);
+  }
+
+  void addToHistory(TodoItem item) async {
+    await _database.addToHistory(item);
     history.add(item);
   }
 
-  void deleteHistory(int index) {
-    history.removeAt(index);
+  void deleteHistory(int index) async {
+    final item = history[index];
+    if (item.id != null) {
+     await _database.deleteHistory(item.id!);
+      history.removeAt(index);
+    }
   }
 
   void handleDelete(BuildContext context, int index) {

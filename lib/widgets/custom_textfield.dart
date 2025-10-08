@@ -6,6 +6,8 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final bool obscureText;
   final VoidCallback? onToggleVisibility;
+  final int maxLines;
+  final IconData? prefixIcon;
 
   const CustomTextField({
     super.key,
@@ -13,7 +15,9 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.isPassword = false,
     this.obscureText = false,
-    this.onToggleVisibility, required int maxLines, required IconData prefixIcon,
+    this.onToggleVisibility,
+    this.maxLines = 1,
+    this.prefixIcon,
   });
 
   @override
@@ -21,9 +25,10 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isPassword ? obscureText : false,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: isPassword ? const Icon(Icons.lock_outline) : null,
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),

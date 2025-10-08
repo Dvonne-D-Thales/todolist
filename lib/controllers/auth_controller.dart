@@ -9,17 +9,23 @@ class AuthController extends GetxController {
 
   void logout() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove("username"); 
+    prefs.remove("username");
     Get.offAllNamed(Routes.login);
-    }
+  }
 
   void login(
     String email,
     String password,
     TextEditingController emailController,
     TextEditingController passwordController,
-  ) {
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+
     if (email == correctUsername && password == correctPassword) {
+      // simpan dulu -> penting pakai await agar selesai sebelum splash cek
+      await prefs.setString("username", email);
+
+      // navigasi ke splash agar muncul jeda (splash akan lanjut ke mainmenu)
       Get.offAllNamed(Routes.splashscreen);
     } else if (email.isEmpty && password.isEmpty) {
       Get.defaultDialog(
@@ -28,7 +34,7 @@ class AuthController extends GetxController {
         textConfirm: "OK",
         confirmTextColor: Colors.white,
         onConfirm: () {
-          Get.back(); // tutup dialog
+          Get.back();
         },
       );
     } else {
@@ -38,11 +44,10 @@ class AuthController extends GetxController {
         textConfirm: "OK",
         confirmTextColor: Colors.white,
         onConfirm: () {
-          Get.back(); // tutup dialog
+          Get.back();
         },
       );
 
-      // clear input
       emailController.clear();
       passwordController.clear();
     }

@@ -11,9 +11,9 @@ class HistoryPage extends StatelessWidget {
     final historyController = Get.find<HistoryController>();
 
     return Scaffold(
-       backgroundColor:Color.fromARGB(255, 230, 240, 250),
+      backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(
-         backgroundColor:Color.fromARGB(255, 230, 240, 250),
+        backgroundColor: const Color.fromARGB(255, 230, 240, 250),
         automaticallyImplyLeading: false,
         title: const Text('History'),
       ),
@@ -29,9 +29,7 @@ class HistoryPage extends StatelessWidget {
               title: item.title,
               description: item.description,
               category: item.category,
-              onDelete: () {
-                historyController.handleDelete(context, index);
-              },
+              onDelete: () => historyController.handleDelete(context, index),
               children: const [],
             );
           },
@@ -40,3 +38,4 @@ class HistoryPage extends StatelessWidget {
     );
   }
 }
+  

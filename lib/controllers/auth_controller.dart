@@ -14,37 +14,41 @@ class AuthController extends GetxController {
     }
 
   void login(
-    String email,
-    String password,
-    TextEditingController emailController,
-    TextEditingController passwordController,
-  ) {
-    if (email == correctUsername && password == correctPassword) {
-      Get.offAllNamed(Routes.splashscreen);
-    } else if (email.isEmpty && password.isEmpty) {
-      Get.defaultDialog(
-        title: "Input Please",
-        middleText: "Input email dan password kosong",
-        textConfirm: "OK",
-        confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.back(); // tutup dialog
-        },
-      );
-    } else {
-      Get.defaultDialog(
-        title: "PEYUSUP!!!",
-        middleText: "Penyusup tidak dikenal, silahkan coba lagi",
-        textConfirm: "OK",
-        confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.back(); // tutup dialog
-        },
-      );
+  String email,
+  String password,
+  TextEditingController emailController,
+  TextEditingController passwordController,
+) async {
+  if (email == correctUsername && password == correctPassword) {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("username", email);
 
-      // clear input
-      emailController.clear();
-      passwordController.clear();
-    }
+    Get.offAllNamed(Routes.splashscreen);
+  } else if (email.isEmpty && password.isEmpty) {
+    Get.defaultDialog(
+      title: "Input Please",
+      middleText: "Input email dan password kosong",
+      textConfirm: "OK",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+      },
+    );
+  } else {
+    Get.defaultDialog(
+      title: "PEYUSUP!!!",
+      middleText: "Penyusup tidak dikenal, silahkan coba lagi",
+      textConfirm: "OK",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+      },
+    );
+
+    emailController.clear();
+    passwordController.clear();
   }
 }
+
+  }
+

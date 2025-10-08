@@ -15,13 +15,13 @@ checkLoginStatus() async {
 
   final savedUsername = prefs.getString('username');
   if (savedUsername != null) {
-    // jika ada username, langsung ke main menu setelah delay
-    Future.delayed(const Duration(seconds: 3), () {
+    
+    Future.delayed(const Duration(seconds: 2), () {
       Get.offAllNamed(Routes.mainmenu);
     });
   } else {
-    // tambahkan delay sebelum ke login
-    Future.delayed(const Duration(seconds: 3), () {
+   
+    Future.delayed(const Duration(seconds: 2), () {
       Get.offAllNamed(Routes.login);
     });
   }

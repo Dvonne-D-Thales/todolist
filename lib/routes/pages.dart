@@ -16,7 +16,10 @@ import 'package:todolist/routes/routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: Routes.login, page: () =>  LoginPage()),
+    GetPage(name: Routes.login, 
+    page: () =>  LoginPage(),
+    binding: MainmenupageBinding()),
+    
     GetPage(name: Routes.register, page: () =>  RegisterPage()),
     GetPage(
       name: Routes.mainmenu,

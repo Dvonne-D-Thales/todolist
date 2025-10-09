@@ -7,16 +7,10 @@ import 'package:todolist/widgets/costum_card.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/costum_text.dart';
 
-class LoginController extends GetxController {
-  var obscurePassword = true.obs;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-}
-
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  final loginController = Get.put(LoginController());
+   final loginController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {

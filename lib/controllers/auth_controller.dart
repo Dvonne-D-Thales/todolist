@@ -6,6 +6,9 @@ import 'package:todolist/routes/routes.dart';
 class AuthController extends GetxController {
   final correctUsername = "a";
   final correctPassword = "a";
+  var obscurePassword = true.obs;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void logout() async {
     final prefs = await SharedPreferences.getInstance();

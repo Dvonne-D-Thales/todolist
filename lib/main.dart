@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist/bindings/initial_bindings.dart';
 import 'package:todolist/routes/pages.dart';
 import 'package:todolist/routes/routes.dart';
 
@@ -18,9 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      initialRoute: Routes.login,
+      initialRoute: Routes.splashscreen,
       getPages: AppPages.pages,
-      initialBinding: InitialBinding(), 
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 import 'package:todolist/bindings/addpage_binding.dart';
-import 'package:todolist/bindings/history_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
 import 'package:todolist/bindings/splashscreen_binding.dart';
-import 'package:todolist/bindings/todolist_binding.dart';
 import 'package:todolist/pages/add_page.dart';
 import 'package:todolist/pages/history_page.dart';
 import 'package:todolist/pages/login_page.dart';
@@ -27,13 +25,13 @@ class AppPages {
     GetPage(
       name: Routes.todoList,
       page: () => TodoListPage(),
-      binding: TodolistBinding(),
+      binding: MainmenupageBinding(),
     ),
 
     GetPage(
       name: Routes.history,
       page: () => HistoryPage(),
-      binding: HistoryBinding(),
+      binding: MainmenupageBinding(),
     ),
 
     GetPage(name: Routes.history, 
@@ -48,7 +46,7 @@ class AppPages {
 
     GetPage(name: Routes.splashscreen, 
     page: () => SplashscreenPage(),
-    binding: SplashscreenBinding(),
+    binding: MainmenupageBinding(),
     ),
   ];
 }

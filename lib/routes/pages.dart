@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:todolist/bindings/addpage_binding.dart';
+import 'package:todolist/bindings/auth_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
 import 'package:todolist/bindings/splashscreen_binding.dart';
 import 'package:todolist/pages/add_page.dart';
@@ -14,7 +15,7 @@ import 'package:todolist/routes/routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: Routes.login, page: () =>  LoginPage()),
+    GetPage(name: Routes.login, page: () =>  LoginPage(), binding: AuthBinding()),
     GetPage(name: Routes.register, page: () =>  RegisterPage()),
     GetPage(
       name: Routes.mainmenu,
@@ -46,7 +47,7 @@ class AppPages {
 
     GetPage(name: Routes.splashscreen, 
     page: () => SplashscreenPage(),
-    binding: MainmenupageBinding(),
+    binding: SplashscreenBinding(),
     ),
   ];
 }

@@ -6,8 +6,8 @@ import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/dropdown_buttonfield.dart';
 
-class AddPage extends StatelessWidget {
-  AddPage({super.key});
+class AddPageMobile extends StatelessWidget {
+  AddPageMobile({super.key});
 
   final AddController controller = Get.put(AddController());
 
@@ -40,6 +40,7 @@ class AddPage extends StatelessWidget {
                 controller: controller.titleController,
                 maxLines: 1,
                 prefixIcon: Icons.title,
+                maxLength: 20,
               ),
 
               const SizedBox(height: 20),
@@ -50,7 +51,9 @@ class AddPage extends StatelessWidget {
                 controller: controller.descController,
                 maxLines: 3,
                 prefixIcon: Icons.description,
+                maxLength: 40,
               ),
+              
 
               const SizedBox(height: 20),
               const Text("Kategori", style: TextStyle(fontSize: 16)),

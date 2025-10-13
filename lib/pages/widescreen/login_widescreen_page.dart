@@ -13,8 +13,11 @@ class LoginWidescreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Color background = Color(0xFFF9FAFB);
+    const Color primaryBlue = Color(0xFF1E3A8A);
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 230, 240, 250),
+      backgroundColor: background,
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -24,10 +27,7 @@ class LoginWidescreenPage extends StatelessWidget {
             Expanded(
               flex: 4,
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 80,
-                  vertical: 60,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 60),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -35,16 +35,12 @@ class LoginWidescreenPage extends StatelessWidget {
                     const SizedBox(height: 8),
                     CostumText.subtitle("Login to continue"),
                     const SizedBox(height: 48),
-
-                    // Username field
                     CustomTextField(
                       label: "Username",
                       controller: loginController.emailController,
                       prefixIcon: Icons.person,
                     ),
                     const SizedBox(height: 24),
-
-                    // Password field
                     Obx(
                       () => CustomTextField(
                         label: "Password",
@@ -59,69 +55,65 @@ class LoginWidescreenPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-
-                    // Buttons
                   ],
                 ),
               ),
             ),
-
             // RIGHT SIDE — BRANDING / ILLUSTRATION
             Expanded(
               flex: 3,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.person_outline,
-                          size: 50,
-                          color: Colors.deepPurple,
-                        ),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.person_outline,
+                        size: 50,
+                        color: primaryBlue,
                       ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        "Welcome Back!",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      "Welcome Back!",
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: primaryBlue,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 8),
-                      CustomButton(
-                        text: "Sign In",
-                        color: Colors.deepPurple,
-                        textColor: Colors.white,
-                        borderRadius: 16,
-                        elevation: 4,
-                        onPressed: () {
-                          loginController.login(
-                            loginController.emailController.text.trim(),
-                            loginController.passwordController.text.trim(),
-                            loginController.emailController,
-                            loginController.passwordController,
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      CustomButton(
-                        text: "Register",
-                        color: Colors.grey[200],
-                        textColor: Colors.black,
-                        borderRadius: 16,
-                        elevation: 0,
-                        onPressed: () {
-                          Get.toNamed(Routes.register);
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomButton(
+                      text: "Sign In",
+                      color: primaryBlue,
+                      textColor: Colors.white,
+                      borderRadius: 16,
+                      elevation: 0,
+                      onPressed: () {
+                        loginController.login(
+                          loginController.emailController.text.trim(),
+                          loginController.passwordController.text.trim(),
+                          loginController.emailController,
+                          loginController.passwordController,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      text: "Register",
+                      color: Colors.white,
+                      textColor: primaryBlue,
+                      borderRadius: 16,
+                      elevation: 0,
+                      onPressed: () {
+                        Get.toNamed(Routes.register);
+                      },
+                    ),
+                  ],
                 ),
-
+              ),
             ),
           ],
         ),

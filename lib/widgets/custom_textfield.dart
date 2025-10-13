@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -9,6 +10,9 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final IconData? prefixIcon;
 
+  // 🆕 Tambahan: batas huruf opsional
+  final int? maxLength;
+
   const CustomTextField({
     super.key,
     required this.label,
@@ -18,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     this.onToggleVisibility,
     this.maxLines = 1,
     this.prefixIcon,
+    this.maxLength,
   });
 
   @override
@@ -26,6 +31,12 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword ? obscureText : false,
       maxLines: maxLines,
+
+      inputFormatters: [
+        if (maxLength != null)
+          LengthLimitingTextInputFormatter(maxLength),
+      ],
+
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,

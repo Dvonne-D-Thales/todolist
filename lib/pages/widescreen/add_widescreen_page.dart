@@ -32,56 +32,73 @@ class AddWidescreenPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // LEFT SIDE: FORM
+            // LEFT SIDE: FORM with 2-column layout
             Expanded(
               flex: 3,
               child: SingleChildScrollView(
                 child: CostumCard(
                   color: Colors.white,
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Name", style: TextStyle(fontSize: 16)),
-                      const SizedBox(height: 8),
-                      CustomTextField(
-                        label: "Enter name",
-                        controller: controller.titleController,
-                        maxLines: 1,
-                        prefixIcon: Icons.title,
+                      // 🔹 LEFT COLUMN: Title & Description
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Name", style: TextStyle(fontSize: 16)),
+                            const SizedBox(height: 8),
+                            CustomTextField(
+                              label: "Enter name",
+                              controller: controller.titleController,
+                              maxLines: 1,
+                              prefixIcon: Icons.title,
+                              maxLength: 20,
+                            ),
+
+                            const SizedBox(height: 20),
+                            CostumText("Description"),
+                            const SizedBox(height: 8),
+                            CustomTextField(
+                              label: "Enter description",
+                              controller: controller.descController,
+                              maxLines: 3,
+                              prefixIcon: Icons.description,
+                              maxLength: 40,
+                            ),
+                            
+                          ],
+                        ),
                       ),
 
-                      const SizedBox(height: 20),
-                      CostumText("Description"),
-                      const SizedBox(height: 8),
-                      CustomTextField(
-                        label: "Enter description",
-                        controller: controller.descController,
-                        maxLines: 3,
-                        prefixIcon: Icons.description,
-                      ),
+                      const SizedBox(width: 32),
 
-                      const SizedBox(height: 20),
-                      const Text("Category", style: TextStyle(fontSize: 16)),
-                      const SizedBox(height: 8),
-                      DropdownButtonfield(
-                        value: controller.category.value.isEmpty
-                            ? null
-                            : controller.category.value,
-                        items: categories,
-                        onChanged: controller.setCategory,
-                      ),
-
-                      const SizedBox(height: 32),
-                      Center(
-                        child: CustomButton(
-                          text: "Save",
-                          color: Colors.deepPurple,
-                          textColor: Colors.white,
-                          onPressed: () {
-                            controller.saveTask(context);
-                          },
-                          borderRadius: 16,
-                          elevation: 4,
+                      // 🔹 RIGHT COLUMN: Category & Save Button
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Category", style: TextStyle(fontSize: 16)),
+                            const SizedBox(height: 8),
+                            DropdownButtonfield(
+                              value: controller.category.value.isEmpty
+                                  ? null
+                                  : controller.category.value,
+                              items: categories,
+                              onChanged: controller.setCategory,
+                            ),
+                            const SizedBox(height: 32),
+                            CustomButton(
+                              text: "Save",
+                              color: const Color(0xFF1E3A8A),
+                              textColor: Colors.white,
+                              onPressed: () {
+                                controller.saveTask(context);
+                              },
+                              borderRadius: 16,
+                              elevation: 4,
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -92,42 +109,7 @@ class AddWidescreenPage extends StatelessWidget {
 
             const SizedBox(width: 24),
 
-            // RIGHT SIDE: PREVIEW CARD
-            Expanded(
-              flex: 2,
-              child: Obx(
-                () => CostumCard(
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Preview",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Divider(),
-                      Text(
-                        "Name: ${controller.titleController.text}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "Description: ${controller.descController.text}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "Category: ${controller.category.value}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+           
           ],
         ),
       ),

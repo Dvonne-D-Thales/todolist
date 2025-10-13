@@ -57,12 +57,14 @@ class TodoCard extends StatelessWidget {
           children: [
             // Title + check button
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Expanded supaya teks pakai sisa ruang dan bisa turun ke bawah
                 Expanded(
                   child: Text(
                     title,
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
                     style: TextStyle(
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
@@ -73,6 +75,11 @@ class TodoCard extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Tambahkan sedikit jarak agar tidak dempet
+                const SizedBox(width: 8),
+
+                // Tombol check
                 IconButton(
                   icon: Icon(
                     isDone ? Icons.check_box : Icons.check_box_outline_blank,
@@ -91,10 +98,7 @@ class TodoCard extends StatelessWidget {
               description,
               maxLines: isWide ? 4 : 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: descSize,
-                color: Colors.black87,
-              ),
+              style: TextStyle(fontSize: descSize, color: Colors.black87),
             ),
 
             const SizedBox(height: 12),

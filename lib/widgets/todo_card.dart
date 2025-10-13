@@ -21,44 +21,107 @@ class TodoCard extends StatelessWidget {
   Color _getCategoryColor() {
     switch (category.toLowerCase()) {
       case "personal":
-        return Colors.green.shade100; // hijau muda
+        return Colors.green.shade100;
       case "school":
-        return Colors.yellow.shade100; // kuning lembut
+        return Colors.yellow.shade100;
       case "business":
-        return Colors.lightBlue.shade100; // biru muda
+        return Colors.lightBlue.shade100;
       default:
-        return Colors.grey.shade200; // fallback warna netral
+        return Colors.grey.shade200;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive font + layout scaling
+    final bool isWide = screenWidth > 900;
+    final double titleSize = isWide ? 22 : 18;
+    final double descSize = isWide ? 16 : 14;
+    final double categorySize = isWide ? 15 : 12;
+    final double iconSize = isWide ? 28 : 22;
+    final double padding = isWide ? 24 : 14;
+
     return Card(
+      elevation: isWide ? 6 : 3,
       color: _getCategoryColor(),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        leading: IconButton(
-          icon: Icon(isDone ? Icons.check_box : Icons.check_box_outline_blank),
-          onPressed: onCheck,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(isWide ? 18 : 12),
+      ),
+      margin: const EdgeInsets.all(8),
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(description),
-            const SizedBox(height: 4),
+            // Title + check button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                      decoration: isDone
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    isDone ? Icons.check_box : Icons.check_box_outline_blank,
+                    size: iconSize,
+                    color: isDone ? Colors.green : Colors.black54,
+                  ),
+                  onPressed: onCheck,
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            // Description
             Text(
-              'Category: $category',
-              style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
+              description,
+              maxLines: isWide ? 4 : 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: descSize,
+                color: Colors.black87,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // Category + delete button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Category: $category",
+                  style: TextStyle(
+                    fontSize: categorySize,
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.delete_outline,
+                    color: Colors.redAccent,
+                    size: iconSize,
+                  ),
+                  onPressed: onDelete,
+                ),
+              ],
             ),
           ],
-        ),
-        trailing: IconButton(
-          icon: const Icon(Icons.delete),
-          onPressed: onDelete,
         ),
       ),
     );

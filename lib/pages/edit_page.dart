@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/responsive_controller.dart';
 import 'package:todolist/pages/mobile/edit_mobile_page.dart';
-import 'package:todolist/pages/widescreen/add_widescreen_page.dart';
 import 'package:todolist/models/todolist_model.dart';
+import 'package:todolist/pages/widescreen/edit_widescreen_page.dart';
 
 class EditPage extends StatelessWidget {
   EditPage({super.key});
@@ -32,7 +32,7 @@ class EditPage extends StatelessWidget {
           final isMobile = responsiveController.isMobile.value;
           return isMobile
               ? EditPageMobile(todo: todo)
-              : AddWidescreenPage();
+              : EditPageWidescreen(todo: todo);
         });
       },
     );

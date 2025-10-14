@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
+import 'package:todolist/controllers/edit_controller.dart';
 
-import 'package:todolist/controllers/todolist_controller.dart';
-
-class TodolistBinding extends Bindings{
+class EditBinding extends Bindings {
   @override
   void dependencies() {
-
-    Get.lazyPut<TodoController>(()=>TodoController());
+    Get.lazyPut<EditController>(() => EditController());
   }
 }

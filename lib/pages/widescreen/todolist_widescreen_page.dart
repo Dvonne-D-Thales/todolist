@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
+import 'package:todolist/routes/routes.dart';
 import 'package:todolist/widgets/todo_card.dart';
-import 'package:todolist/pages/edit_page.dart';
+
 
 class TodolistWidescreenPage extends StatelessWidget {
   TodolistWidescreenPage({super.key});
@@ -68,13 +69,9 @@ class TodolistWidescreenPage extends StatelessWidget {
                         onCheck: () => todoController.confirmToggle(index),
 
                        
-                        onEdit: () {
-                          Get.to(
-                            () => EditPage(),
-                            arguments:
-                                todo,
-                          )?.then((_) => todoController.loadTodos());
-                        },
+                       onEdit: () {
+                  Get.toNamed(Routes.edit, arguments: todo);
+                },
                       ),
                     ),
                   );

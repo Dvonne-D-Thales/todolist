@@ -5,7 +5,6 @@ import 'package:todolist/models/todolist_model.dart';
 import 'package:todolist/routes/routes.dart';
 import 'package:todolist/database/todolist_crud.dart';
 
-
 class TodoController extends GetxController {
   var todos = <TodoItem>[].obs;
 
@@ -34,20 +33,21 @@ class TodoController extends GetxController {
   }
 
   void addTodo(String title, String description, String category) async {
-  final newTodo = TodoItem(
-    title: title,
-    description: description,
-    category: category,
-  );
-  await _database.createTodo(newTodo);
-  loadTodos();
-}
-
+    final newTodo = TodoItem(
+      title: title,
+      description: description,
+      category: category,
+    );
+    await _database.createTodo(newTodo);
+    loadTodos();
+  }
 
   void deleteTodo(int index) async {
     final todo = todos[index];
     if (todo.id != null) {
-      await _database.deleteTodo(todo.id!); // Gunakan id untuk menghapus dari database
+      await _database.deleteTodo(
+        todo.id!,
+      ); // Gunakan id untuk menghapus dari database
       todos.removeAt(index);
     }
   }
@@ -63,12 +63,12 @@ class TodoController extends GetxController {
     );
 
     if (todo.id != null) {
-      await _database.updateTodo(todo.id!, updatedTodo); 
+      await _database.updateTodo(todo.id!, updatedTodo);
       todos[index] = updatedTodo;
 
       if (updatedTodo.isDone) {
         final historyController = Get.find<HistoryController>();
-        historyController.addToHistory(updatedTodo); 
+        historyController.addToHistory(updatedTodo);
         await _database.deleteTodo(todo.id!);
         todos.removeAt(index);
       }
@@ -85,10 +85,10 @@ class TodoController extends GetxController {
       confirmTextColor: Colors.white,
       onConfirm: () {
         deleteTodo(index);
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Deleted $title")),
-        );
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Deleted $title")));
         Get.back();
       },
     );

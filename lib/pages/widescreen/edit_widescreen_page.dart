@@ -25,13 +25,10 @@ class EditPageWidescreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(
-        title: const Text(
-          "Edit Tugas",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-        ),
+        title: const Text("Edit Tugas"),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 230, 240, 250),
         elevation: 0,
-        centerTitle: true,
       ),
       body: Center(
         child: Container(
@@ -45,8 +42,9 @@ class EditPageWidescreen extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Kolom kiri (judul dan deskripsi)
+              // Kolom kiri - Judul dan Deskripsi
               Expanded(
+                flex: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,8 +73,9 @@ class EditPageWidescreen extends StatelessWidget {
 
               const SizedBox(width: 40),
 
-              // Kolom kanan (kategori dan tombol)
+              // Kolom kanan - Kategori dan tombol Update
               Expanded(
+                flex: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -99,7 +98,7 @@ class EditPageWidescreen extends StatelessWidget {
                         textColor: Colors.white,
                         onPressed: controller.saveTask,
                         borderRadius: 16,
-                        elevation: 2,
+                        elevation: 3,
                         width: 200,
                       ),
                     ),

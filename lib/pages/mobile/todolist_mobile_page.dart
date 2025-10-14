@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
-import 'package:todolist/pages/edit_page.dart';
+import 'package:todolist/routes/routes.dart';
 import 'package:todolist/widgets/todo_card.dart';
 
 class TodoListPage extends StatelessWidget {
@@ -54,10 +54,7 @@ class TodoListPage extends StatelessWidget {
                 onDelete: () => todoController.confirmDelete(context, index),
                 onCheck: () => todoController.confirmToggle(index),
                 onEdit: () {
-                  Get.to(
-                    () => EditPage(),
-                    arguments: todo,
-                  )?.then((_) => todoController.loadTodos());
+                  Get.toNamed(Routes.edit, arguments: todo);
                 },
               ),
             );

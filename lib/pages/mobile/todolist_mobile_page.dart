@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
+import 'package:todolist/pages/edit_page.dart';
 import 'package:todolist/widgets/todo_card.dart';
 
 class TodoListPage extends StatelessWidget {
@@ -43,7 +44,8 @@ class TodoListPage extends StatelessWidget {
           separatorBuilder: (_, __) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             final todo = todoController.todos[index];
-            return IntrinsicHeight( // ✅ tinggi card menyesuaikan isi
+            return IntrinsicHeight(
+              // tinggi card menyesuaikan isi
               child: TodoCard(
                 title: todo.title,
                 description: todo.description,
@@ -51,6 +53,12 @@ class TodoListPage extends StatelessWidget {
                 isDone: todo.isDone,
                 onDelete: () => todoController.confirmDelete(context, index),
                 onCheck: () => todoController.confirmToggle(index),
+                onEdit: () {
+                  Get.to(
+                    () => EditPage(),
+                    arguments: todo,
+                  )?.then((_) => todoController.loadTodos());
+                },
               ),
             );
           },

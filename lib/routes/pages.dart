@@ -1,16 +1,18 @@
 import 'package:get/get.dart';
 import 'package:todolist/bindings/addpage_binding.dart';
+import 'package:todolist/bindings/editpage_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
 import 'package:todolist/pages/add_page.dart';
+import 'package:todolist/pages/edit_page.dart';
 import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/pages/mainmenu_page.dart';
-import 'package:todolist/pages/mainmenu_widescreen_page.dart';
 import 'package:todolist/pages/history_page.dart';
 import 'package:todolist/pages/mobile/profile_mobile_page.dart';
 import 'package:todolist/pages/mobile/register_mobile_page.dart';
 import 'package:todolist/pages/mobile/splashscreen_mobile_page.dart'; 
 import 'package:todolist/pages/todolist_page.dart';
 import 'package:todolist/routes/routes.dart';
+
 
 class AppPages {
   static final pages = [
@@ -25,12 +27,7 @@ class AppPages {
       binding: MainmenupageBinding(),
     ),
 
-    GetPage(
-      name: Routes.widemainmenu,
-      page: () => WidescreenDashboardPage(),
-      binding: MainmenupageBinding(),
-    ),
-
+  
     GetPage(
       name: Routes.todoList,
       page: () => ResponsiveTodoListPage(),
@@ -56,6 +53,11 @@ class AppPages {
     GetPage(name: Routes.splashscreen, 
     page: () => SplashscreenPage(),
     binding: MainmenupageBinding(),
+    ),
+    GetPage(
+      name: Routes.edit,
+      page: () => EditPage(),
+      binding: EditBinding(),
     ),
   ];
 }

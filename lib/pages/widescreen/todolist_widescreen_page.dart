@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
 import 'package:todolist/widgets/todo_card.dart';
+import 'package:todolist/pages/edit_page.dart';
 
 class TodolistWidescreenPage extends StatelessWidget {
   TodolistWidescreenPage({super.key});
@@ -50,20 +51,30 @@ class TodolistWidescreenPage extends StatelessWidget {
                   crossAxisCount: crossAxisCount,
                   crossAxisSpacing: 24,
                   mainAxisSpacing: 24,
-                  // ❌ childAspectRatio dihapus agar tinggi fleksibel
                 ),
                 itemBuilder: (context, index) {
                   final todo = todoController.todos[index];
+
                   return Align(
                     alignment: Alignment.topCenter,
-                    child: IntrinsicHeight( 
+                    child: IntrinsicHeight(
                       child: TodoCard(
                         title: todo.title,
                         description: todo.description,
                         category: todo.category,
                         isDone: todo.isDone,
-                        onDelete: () => todoController.confirmDelete(context, index),
+                        onDelete: () =>
+                            todoController.confirmDelete(context, index),
                         onCheck: () => todoController.confirmToggle(index),
+
+                       
+                        onEdit: () {
+                          Get.to(
+                            () => EditPage(),
+                            arguments:
+                                todo,
+                          )?.then((_) => todoController.loadTodos());
+                        },
                       ),
                     ),
                   );

@@ -5,6 +5,7 @@ class TodoCard extends StatelessWidget {
   final String description;
   final String category;
   final VoidCallback? onDelete;
+  final VoidCallback? onEdit;  // <- Tombol Edit
   final bool isDone;
   final VoidCallback? onCheck;
 
@@ -14,6 +15,7 @@ class TodoCard extends StatelessWidget {
     required this.description,
     required this.category,
     this.onDelete,
+    this.onEdit, // <- Tombol Edit
     this.isDone = false,
     this.onCheck,
   });
@@ -35,7 +37,6 @@ class TodoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Responsive font + layout scaling
     final bool isWide = screenWidth > 900;
     final double titleSize = isWide ? 22 : 18;
     final double descSize = isWide ? 16 : 14;
@@ -59,12 +60,10 @@ class TodoCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Expanded supaya teks pakai sisa ruang dan bisa turun ke bawah
                 Expanded(
                   child: Text(
                     title,
                     softWrap: true,
-                    overflow: TextOverflow.visible,
                     style: TextStyle(
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
@@ -75,11 +74,7 @@ class TodoCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Tambahkan sedikit jarak agar tidak dempet
                 const SizedBox(width: 8),
-
-                // Tombol check
                 IconButton(
                   icon: Icon(
                     isDone ? Icons.check_box : Icons.check_box_outline_blank,
@@ -96,32 +91,48 @@ class TodoCard extends StatelessWidget {
             // Description
             Text(
               description,
-              maxLines: isWide ? 4 : 2,
-              overflow: TextOverflow.ellipsis,
+              softWrap: true,
               style: TextStyle(fontSize: descSize, color: Colors.black87),
             ),
 
             const SizedBox(height: 12),
 
-            // Category + delete button
+            // Category + edit + delete buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Category: $category",
-                  style: TextStyle(
-                    fontSize: categorySize,
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  child: Text(
+                    "Category: $category",
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: categorySize,
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.delete_outline,
-                    color: Colors.redAccent,
-                    size: iconSize,
-                  ),
-                  onPressed: onDelete,
+                Row(
+                  children: [
+                    if (onEdit != null)
+                      IconButton(
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          color: Colors.deepPurple,
+                          size: iconSize,
+                        ),
+                        onPressed: onEdit,
+                      ),
+                    if (onDelete != null)
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete_outline,
+                          color: Colors.redAccent,
+                          size: iconSize,
+                        ),
+                        onPressed: onDelete,
+                      ),
+                  ],
                 ),
               ],
             ),

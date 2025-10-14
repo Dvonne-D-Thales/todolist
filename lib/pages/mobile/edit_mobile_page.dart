@@ -6,11 +6,16 @@ import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/dropdown_buttonfield.dart';
 
-class EditPageMobile extends StatelessWidget {
+class EditPageMobile extends StatefulWidget {
   final TodoItem todo;
-  EditPageMobile({super.key, required this.todo});
+  const EditPageMobile({super.key, required this.todo});
 
-  final EditController controller = Get.find<EditController>();
+  @override
+  State<EditPageMobile> createState() => _EditPageMobileState();
+}
+
+class _EditPageMobileState extends State<EditPageMobile> {
+  final controller = Get.find<EditController>();
 
   final List<Map<String, dynamic>> categories = const [
     {"label": "School", "icon": Icons.school},
@@ -19,9 +24,14 @@ class EditPageMobile extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    controller.initTodo(todo);
+  void initState() {
+    super.initState();
+    // 🔹 Init cuma sekali di sini, bukan di build()
+    controller.initTodo(widget.todo);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 240, 250),
       appBar: AppBar(

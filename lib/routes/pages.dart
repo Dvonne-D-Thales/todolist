@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:todolist/bindings/addpage_binding.dart';
-import 'package:todolist/bindings/editpage_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
 import 'package:todolist/pages/add_page.dart';
 import 'package:todolist/pages/edit_page.dart';
@@ -57,7 +55,7 @@ class AppPages {
     GetPage(
       name: Routes.edit,
       page: () => EditPage(),
-      binding: EditBinding(),
+      binding: MainmenupageBinding(),
     ),
   ];
 }

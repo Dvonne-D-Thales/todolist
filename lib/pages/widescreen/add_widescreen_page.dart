@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/add_controller.dart';
 import 'package:todolist/widgets/costum_card.dart';
+import 'package:todolist/widgets/costum_text.dart';
 import 'package:todolist/widgets/custom_button.dart';
 import 'package:todolist/widgets/custom_textfield.dart';
 import 'package:todolist/widgets/dropdown_buttonfield.dart';

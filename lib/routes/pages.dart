@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:todolist/bindings/addpage_binding.dart';
 import 'package:todolist/bindings/mainmenupage_binding.dart';
+import 'package:todolist/pages/add_page.dart';
 import 'package:todolist/pages/login_page.dart';
 import 'package:todolist/pages/mainmenu_page.dart';
 import 'package:todolist/pages/mainmenu_widescreen_page.dart';
-import 'package:todolist/pages/mobile/add_mobile_page.dart';
 import 'package:todolist/pages/mobile/history_mobile_page.dart';
 import 'package:todolist/pages/mobile/profile_mobile_page.dart';
 import 'package:todolist/pages/mobile/register_mobile_page.dart';
@@ -49,8 +48,8 @@ class AppPages {
     
     GetPage(
       name: Routes.addTodo,
-      page: () => AddPage(),
-      binding: AddBinding(),
+      page: () => ResponsiveAddPage(),
+      binding: MainmenupageBinding(),
     ),
 
     GetPage(name: Routes.splashscreen, 

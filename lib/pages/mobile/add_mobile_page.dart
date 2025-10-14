@@ -9,7 +9,7 @@ import 'package:todolist/widgets/dropdown_buttonfield.dart';
 class AddPage extends StatelessWidget {
   AddPage({super.key});
 
-  final AddController controller = Get.put(AddController());
+  final controller = Get.find<AddController>();
 
   // 👉 Item dropdown sekarang diatur di page
   final List<Map<String, dynamic>> categories = const [
@@ -55,14 +55,21 @@ class AddPage extends StatelessWidget {
               const SizedBox(height: 20),
               const Text("Kategori", style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8),
-              DropdownButtonfield(
-                value: controller.category.value.isEmpty
-                    ? null
-                    : controller.category.value,
-                items: categories, 
-                onChanged: controller.setCategory,
-              ),
-              
+              Obx(() {
+                return DropdownButtonfield(
+                  value: controller.category.value.isEmpty
+                      ? null
+                      : controller.category.value,
+                  items: categories,
+                  onChanged: (value) {
+                    // 🔹 Schedule reactive update after current frame
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      controller.setCategory(value);
+                    });
+                  },
+                );
+              }),
+
               const SizedBox(height: 32),
               Center(
                 child: CustomButton(

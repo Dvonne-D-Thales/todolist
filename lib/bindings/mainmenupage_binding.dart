@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:todolist/controllers/add_controller.dart';
 import 'package:todolist/controllers/auth_controller.dart';
 import 'package:todolist/controllers/history_controller.dart';
 import 'package:todolist/controllers/navbar_controller.dart';
@@ -15,6 +16,7 @@ class MainmenupageBinding extends Bindings{
     Get.lazyPut<TodoController>(()=>TodoController());
     Get.lazyPut<HistoryController>(()=>HistoryController());
     Get.lazyPut<ResponsiveController>(()=>ResponsiveController());
+    Get.lazyPut<AddController>(() => AddController());
   }
   
 }

@@ -38,13 +38,21 @@ class HistoryCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min, // agar tinggi menyesuaikan isi
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                // Judul wrap otomatis
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    softWrap: true,
+                  ),
                 ),
                 if (onDelete != null)
                   IconButton(
@@ -54,7 +62,11 @@ class HistoryCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(description),
+            // Deskripsi wrap otomatis
+            Text(
+              description,
+              softWrap: true,
+            ),
             const SizedBox(height: 4),
             Text(
               'Category: $category',

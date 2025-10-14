@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/controllers/todolist_controller.dart';
 import 'package:todolist/widgets/todo_card.dart';
+import 'package:todolist/pages/edit_page.dart';
 
 class TodolistWidescreenPage extends StatelessWidget {
   TodolistWidescreenPage({super.key});
@@ -9,23 +10,23 @@ class TodolistWidescreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    int crossAxisCount = (screenWidth ~/ 380).clamp(2, 5); // slightly bigger cards
+    const backgroundColor = Color(0xFFF9FBFD);
+    const primaryColor = Color(0xFF1E3A8A);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFE6F0FA),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE6F0FA),
-        automaticallyImplyLeading: false,
+        backgroundColor: backgroundColor,
+        elevation: 0,
+        centerTitle: true,
         title: const Text(
-          'Todo List',
+          'My Tasks',
           style: TextStyle(
+            fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
-            fontSize: 28, // ⬆ larger title
+            color: primaryColor,
           ),
         ),
-        elevation: 0,
       ),
       body: Obx(() {
         if (todoController.todos.isEmpty) {
@@ -38,24 +39,46 @@ class TodolistWidescreenPage extends StatelessWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 24),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              crossAxisSpacing: 28,
-              mainAxisSpacing: 28,
-              childAspectRatio: 1.3,
-            ),
-            itemCount: todoController.todos.length,
-            itemBuilder: (context, index) {
-              final todo = todoController.todos[index];
-              return TodoCard(
-                title: todo.title,
-                description: todo.description,
-                category: todo.category,
-                isDone: todo.isDone,
-                onDelete: () => todoController.confirmDelete(context, index),
-                onCheck: () => todoController.confirmToggle(index),
+          padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final screenWidth = constraints.maxWidth;
+              final crossAxisCount = (screenWidth ~/ 360).clamp(2, 6);
+
+              return GridView.builder(
+                itemCount: todoController.todos.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 24,
+                ),
+                itemBuilder: (context, index) {
+                  final todo = todoController.todos[index];
+
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: IntrinsicHeight(
+                      child: TodoCard(
+                        title: todo.title,
+                        description: todo.description,
+                        category: todo.category,
+                        isDone: todo.isDone,
+                        onDelete: () =>
+                            todoController.confirmDelete(context, index),
+                        onCheck: () => todoController.confirmToggle(index),
+
+                       
+                        onEdit: () {
+                          Get.to(
+                            () => EditPage(),
+                            arguments:
+                                todo,
+                          )?.then((_) => todoController.loadTodos());
+                        },
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),
@@ -64,14 +87,11 @@ class TodolistWidescreenPage extends StatelessWidget {
       floatingActionButton: Obx(
         () => AnimatedRotation(
           turns: todoController.turns.value,
-          duration: const Duration(seconds: 1),
-          child: FloatingActionButton.extended(
+          duration: const Duration(milliseconds: 800),
+          child: FloatingActionButton(
+            backgroundColor: primaryColor,
             onPressed: todoController.rotateAndNavigate,
-            icon: const Icon(Icons.add, size: 28),
-            label: const Text(
-              "Add Task",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            ),
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ),
       ),

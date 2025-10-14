@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:todolist/pages/mobile/history_mobile_page.dart';
+import 'package:todolist/pages/history_page.dart';
 import 'package:todolist/pages/mobile/profile_mobile_page.dart';
 import 'package:todolist/pages/mobile/todolist_mobile_page.dart';
 import 'package:todolist/pages/widescreen/history_widescreen.dart';
@@ -11,7 +11,7 @@ class NavbarController extends GetxController {
   
     final widescreenPages = [
     TodolistWidescreenPage(),
-    HistoryWidescreen(),
+    HistoryWidescreenPage(),
     ProfileWidescreenPage(),
   ];
 

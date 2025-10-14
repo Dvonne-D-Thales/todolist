@@ -8,4 +8,5 @@ class Routes {
   static const String mainmenu = '/mainmenu';
   static const String splashscreen = '/splashscreen';
   static const String widemainmenu = '/widemainmenu';
+  static const String edit = '/edit';
 }

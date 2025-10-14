@@ -28,63 +28,88 @@ class AddWidescreenPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
-        child: CostumCard(
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("Judul Tugas", style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              CustomTextField(
-                label: "Masukan Judul",
-                controller: controller.titleController,
-                maxLines: 1,
-                prefixIcon: Icons.title,
-              ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // LEFT SIDE: FORM with 2-column layout
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: CostumCard(
+                  color: Colors.white,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 🔹 LEFT COLUMN: Title & Description
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Name", style: TextStyle(fontSize: 16)),
+                            const SizedBox(height: 8),
+                            CustomTextField(
+                              label: "Enter name",
+                              controller: controller.titleController,
+                              maxLines: 1,
+                              prefixIcon: Icons.title,
+                              maxLength: 20,
+                            ),
 
-              const SizedBox(height: 20),
-              const Text("Deskripsi", style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              CustomTextField(
-                label: "Masukkan deskripsi",
-                controller: controller.descController,
-                maxLines: 3,
-                prefixIcon: Icons.description,
-              ),
+                            const SizedBox(height: 20),
+                            CostumText("Description"),
+                            const SizedBox(height: 8),
+                            CustomTextField(
+                              label: "Enter description",
+                              controller: controller.descController,
+                              maxLines: 3,
+                              prefixIcon: Icons.description,
+                              maxLength: 40,
+                            ),
+                            
+                          ],
+                        ),
+                      ),
 
-              const SizedBox(height: 20),
-              const Text("Kategori", style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              Obx(() {
-                return DropdownButtonfield(
-                  value: controller.category.value.isEmpty
-                      ? null
-                      : controller.category.value,
-                  items: categories,
-                  onChanged: (value) {
-                    // 🔹 Schedule reactive update after current frame
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      controller.setCategory(value);
-                    });
-                  },
-                );
-              }),
+                      const SizedBox(width: 32),
 
-              const SizedBox(height: 32),
-              Center(
-                child: CustomButton(
-                  text: "Simpan",
-                  color: Colors.deepPurple,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    controller.saveTask(context);
-                  },
-                  borderRadius: 16,
-                  elevation: 4,
+                      // 🔹 RIGHT COLUMN: Category & Save Button
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Category", style: TextStyle(fontSize: 16)),
+                            const SizedBox(height: 8),
+                            DropdownButtonfield(
+                              value: controller.category.value.isEmpty
+                                  ? null
+                                  : controller.category.value,
+                              items: categories,
+                              onChanged: controller.setCategory,
+                            ),
+                            const SizedBox(height: 32),
+                            CustomButton(
+                              text: "Save",
+                              color: const Color(0xFF1E3A8A),
+                              textColor: Colors.white,
+                              onPressed: () {
+                                controller.saveTask(context);
+                              },
+                              borderRadius: 16,
+                              elevation: 4,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+
+            const SizedBox(width: 24),
+
+           
+          ],
         ),
       ),
     );

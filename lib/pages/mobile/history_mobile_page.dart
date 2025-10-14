@@ -3,28 +3,49 @@ import 'package:get/get.dart';
 import 'package:todolist/controllers/history_controller.dart';
 import 'package:todolist/widgets/history_card.dart';
 
-class HistoryPage extends StatelessWidget {
-  const HistoryPage({super.key});
+class HistoryMobilePage extends StatelessWidget {
+  const HistoryMobilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final historyController = Get.find<HistoryController>();
 
+    const backgroundColor = Color(0xFFF9FBFD);
+    const primaryColor = Color(0xFF1E3A8A);
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 230, 240, 250),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 230, 240, 250),
-        automaticallyImplyLeading: false,
-        title: const Text('History'),
+        backgroundColor: backgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'History',
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: Obx(() {
         if (historyController.history.isEmpty) {
-          return const Center(child: Text("No history yet"));
+          return const Center(
+            child: Text(
+              "No history yet",
+              style: TextStyle(color: Colors.black54, fontSize: 16),
+            ),
+          );
         }
-        return ListView.builder(
-          itemCount: historyController.history.length,
+
+        final items = historyController.history;
+
+        return ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          itemCount: items.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
-            final item = historyController.history[index];
+            final item = items[index];
             return HistoryCard(
               title: item.title,
               description: item.description,
@@ -38,4 +59,3 @@ class HistoryPage extends StatelessWidget {
     );
   }
 }
-  
